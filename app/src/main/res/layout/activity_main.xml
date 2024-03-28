@@ -7,9 +7,9 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btnParcourtRecetteMain"
         android:layout_width="297dp"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_marginTop="392dp"
         android:text="@string/voir_Recettes"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,7 +25,8 @@
         android:fontFamily="sans-serif-black"
         android:text="@string/descriptionMenu"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextSizeCheck" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -42,9 +43,9 @@
         app:layout_constraintGuide_begin="-4dp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnConnexionMain"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="@string/Connexion"
@@ -59,9 +60,11 @@
         android:layout_height="118dp"
         android:layout_marginStart="112dp"
         android:layout_marginTop="136dp"
+        android:contentDescription="@string/todo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/screenshot_2024_03_14_170416" />
+        app:srcCompat="@drawable/screenshot_2024_03_14_170416"
+        tools:ignore="ImageContrastCheck" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -71,16 +74,18 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/screenshot_2024_03_14_170407" />
+        app:srcCompat="@drawable/screenshot_2024_03_14_170407"
+        android:contentDescription="@string/todoo" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/btnCreerCompteMain"
         android:layout_width="297dp"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_marginStart="56dp"
         android:layout_marginTop="340dp"
         android:text="@string/Connexion_Inscription"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

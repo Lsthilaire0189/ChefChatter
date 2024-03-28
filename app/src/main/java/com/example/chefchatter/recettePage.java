@@ -24,7 +24,7 @@ public class recettePage extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        boutonRetour = findViewById(R.id.retourRecettePage);
+        boutonRetour = findViewById(R.id.btnRetourRP);
         boutonRetour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

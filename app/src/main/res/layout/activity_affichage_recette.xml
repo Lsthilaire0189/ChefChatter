@@ -12,76 +12,93 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-        <Button
-            android:layout_marginLeft="40dp"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="retour"/>
-        <Button
-            android:layout_marginLeft="40dp"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="Mon compte"/>
-    </LinearLayout>
+
     <RelativeLayout
         android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
-            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:text="@string/trouvez_la_recette_parfaite"
             android:textColor="@color/black"
-            android:text="Trouvez la recette parfaite!"/>
+            android:textSize="24sp"
+            android:textStyle="bold" />
     </RelativeLayout>
+
     <Button
-        android:layout_marginTop="10dp"
+        android:id="@+id/btnVoirTtesRecettes"
         android:layout_width="wrap_content"
+        android:layout_height="48dp"
         android:layout_gravity="right"
+        android:layout_marginTop="10dp"
         android:background="#00000000"
+        android:text="@string/voir_toutes_les_recettes"
         android:textColor="#000"
-        android:layout_height="40dp"
-        android:text="Voir toutes les recettes"/>
+        tools:ignore="RtlHardcoded" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:background="@color/couleurSecondaire">
+
         <LinearLayout
             android:id="@+id/titre"
             android:layout_width="170dp"
             android:layout_height="280dp"
+            android:background="@color/couleurPrimaire"
             android:orientation="vertical"
-            android:background="@color/couleurPrimaire">
+            tools:ignore="TextSizeCheck">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="25dp"
                 android:layout_margin="20dp"
+                android:text="@string/recettes_populaires"
                 android:textColor="@color/white"
-                android:text="Recettes populaires"/>
+                android:textSize="25sp"
+                tools:ignore="TextSizeCheck" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:layout_marginHorizontal="20dp"
-                android:text="Voici les recettes les plus aimées par les membres"/>
+                android:text="@string/voici_les_recettes_les_plus_aim_es_par_les_membres"
+                android:textColor="@color/white" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvListeRecettesPop"
             android:layout_width="match_parent"
             android:layout_height="170dp"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="7dp"
+            android:layout_marginStart="7dp"
             android:layout_marginTop="24dp"
-            android:layout_toRightOf="@id/titre" />
+            android:layout_toEndOf="@id/titre" />
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnRetourAR"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:text="@string/retour"
+            tools:ignore="ButtonStyle" />
+
+        <Button
+            android:id="@+id/btnCompteAR"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:text="@string/mon_compte"
+            tools:ignore="ButtonStyle" />
+    </LinearLayout>
 
 </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
