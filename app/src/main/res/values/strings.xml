@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ChefChatter</string>
+    <string name="Connexion">Connexion</string>
+    <string name="descriptionMenu">Bienvenue chez ChefChatter! Ici, vous avez la liberté de partager au monde vos recettes ou de vous inspirez de plusieurs chefs de partout à travers le globle!</string>
+    <string name="Connexion_Inscription">Pas de compte? Inscrivez-vous ici!</string>
+    <string name="voir_Recettes">Parcourir les recettes!</string>
+    <string name="adresse_courriel">Adresse courriel</string>
+</resources>

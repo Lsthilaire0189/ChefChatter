@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".recettePage">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/retourRecettePage"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:background="#00000000"
+                android:textColor="#000"
+                android:layout_height="40dp"
+                android:text="Retour"/>
+            <TextView
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                android:text="Titre de la recette"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                app:strokeColor="@color/black"
+                app:strokeWidth="1dp"
+                android:padding="1dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium"
+                app:srcCompat="@drawable/_0707829_front_a01__2"/>
+            <TextView
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:text="Recette par: Nom du chef"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginRight="20dp"
+                    android:textSize="10sp"
+                    android:text="Temps de cuisson:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:textSize="10sp"
+                    android:text="Temps de préparation:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ingrédients"
+                    android:textStyle="bold"/>
+                <ListView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="400dp"/>
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Préparation"/>
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="400dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
