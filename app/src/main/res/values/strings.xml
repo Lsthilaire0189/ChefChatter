@@ -4,5 +4,13 @@
     <string name="descriptionMenu">Bienvenue chez ChefChatter! Ici, vous avez la liberté de partager au monde vos recettes ou de vous inspirez de plusieurs chefs de partout à travers le globle!</string>
     <string name="Connexion_Inscription">Pas de compte? Inscrivez-vous ici!</string>
     <string name="voir_Recettes">Parcourir les recettes!</string>
-    <string name="adresse_courriel">Adresse courriel</string>
+
+    <string name="btn_Deconexion">Deconnexion</string>
+    <string name="btn_ajouter_recette">Ajouter une recette à votre livre</string>
+    <string name="btn_modifier_recette">Modifier vos recettes déjà existantes</string>
+    <string name="btn_parcourir_recettes">Parcourir les recettes</string>
+    <string name="btn_modifier_compte">Modifier votre Compte</string>
+    <string name="bonjour">Bonjour %1$s! Que souhaitez vous faire aujourd\'hui?</string>
+
+    <string name="mot_de_passe">Mot de passe</string>
 </resources>

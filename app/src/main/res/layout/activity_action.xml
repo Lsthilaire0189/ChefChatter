@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="124dp"
+        android:orientation="horizontal">
+
+
+        <ImageButton
+            android:id="@+id/ibHome"
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_weight="2"
+            app:srcCompat="@drawable/homeimage"
+            tools:ignore="ImageContrastCheck"
+            android:contentDescription="TODO" />
+
+        <ImageView
+            android:id="@+id/ivTitre"
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_weight="5"
+            app:srcCompat="@drawable/screenshot_2024_03_14_170407" />
+
+        <Button
+            android:id="@+id/btnDeconnexion"
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_weight="2"
+            android:text="@string/btn_Deconexion" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvBonjour"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/bonjour"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="normal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnAjouterRecette"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_ajouter_recette"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"/>
+
+        <Button
+            android:id="@+id/btnModifierRecette"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_modifier_recette"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"/>
+
+        <Button
+            android:id="@+id/btnParcourirRecettes"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_parcourir_recettes"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"/>
+
+        <Button
+            android:id="@+id/btnModifierCompte"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="@string/btn_modifier_compte"
+            tools:ignore="TextSizeCheck" />
+
+    </LinearLayout>
+
+</LinearLayout>
