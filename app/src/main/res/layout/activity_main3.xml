@@ -5,96 +5,125 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity3">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:orientation="vertical">
-        <LinearLayout
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_marginTop="5dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="Retour"/>
+            android:layout_marginTop="5dp">
+
             <TextView
-                android:layout_gravity="right"
-                android:layout_marginLeft="40dp"
+                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Création d'un compte"
-                android:textSize="25dp"
+                android:text="@string/cr_ation_d_un_compte"
+                android:textColor="@color/black"
+                android:textSize="25sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TextSizeCheck" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
-            android:layout_marginTop="40dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="40dp"
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/firstName"
-                android:hint="Prénom"
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
+                android:layout_height="60dp"
+                android:hint="@string/pr_nom">
+
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputPrenomMain3"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"/>
+                    android:layout_height="50dp"
+                    android:textColorHint="#546E7A"
+                    tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/lastName"
-                android:hint="Nom de famille"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:hint="@string/nom_de_famille">
+
                 <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"/>
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/dateNaissance"
-                android:hint="Date de naissance"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="10dp">
-                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputNomFamilleMain3"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:inputType="date"/>
+                    android:textColorHint="#546E7A"
+                    tools:ignore="TextContrastCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dateNaissance"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:hint="@string/date_de_naissanceMain3"
+                android:inputType="date">
+
+                <Button
+                    android:id="@+id/btnDateNaissanceMain3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/date_de_naissance" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/email"
-                android:hint="Adresse courriel"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:hint="@string/adresse_courrielMain3">
+
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputAdrCourrielMain3"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="textEmailAddress"
+                    android:textColorHint="#546E7A"
+                    tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/password"
-                android:hint="Mot de passe"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="10dp"
+                android:hint="@string/mot_de_passe"
                 app:passwordToggleEnabled="true">
+
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputMdpMain3"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword"
+                    tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btnRetourMain3"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/retourMain3" />
         </LinearLayout>
 
     </LinearLayout>

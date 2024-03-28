@@ -17,9 +17,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        boutonCreationCompte=findViewById(R.id.button2);
-        boutonConnexion=findViewById(R.id.button5);
-        boutonAfficherRecette=findViewById(R.id.button4);
+        boutonCreationCompte=findViewById(R.id.btnConnexionMain);
+        boutonConnexion=findViewById(R.id.btnCreerCompteMain);
+        boutonAfficherRecette=findViewById(R.id.btnParcourtRecetteMain);
         boutonCreationCompte.setOnClickListener(this);
         boutonConnexion.setOnClickListener(this);
         boutonAfficherRecette.setOnClickListener(this);
