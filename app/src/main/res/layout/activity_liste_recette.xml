@@ -8,35 +8,47 @@
     tools:context=".ListeRecette">
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:orientation="vertical"
+        android:layout_width="403dp"
+        android:layout_height="699dp"
         android:layout_margin="10dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <TextView
-            android:text="@string/liste_des_recettes"
-            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/liste_des_recettes" />
 
         <EditText
             android:id="@+id/inputChercherRecette"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
+            android:autofillHints=""
             android:hint="@string/rechercher"
             android:inputType="text"
             android:minHeight="48dp"
             android:textColorHint="#546E7A"
-            android:autofillHints=""
             tools:ignore="TextFields" />
 
         <ListView
             android:id="@+id/lvListeRecette"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="510dp">
 
         </ListView>
+
+        <Button
+            android:id="@+id/btnAnnulerLR"
+            android:layout_width="109dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:minHeight="48dp"
+            android:text="@string/annuler"
+            tools:ignore="TouchTargetSizeCheck" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,36 +6,47 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="124dp"
+        android:layout_height="143dp"
         android:orientation="horizontal">
 
 
         <ImageButton
             android:id="@+id/ibHome"
-            android:layout_width="50dp"
-            android:layout_height="80dp"
-            android:layout_weight="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/todo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/homeimage"
-            tools:ignore="ImageContrastCheck"
-            android:contentDescription="TODO" />
+            tools:ignore="ImageContrastCheck,DuplicateSpeakableTextCheck" />
 
         <ImageView
             android:id="@+id/ivTitre"
-            android:layout_width="50dp"
-            android:layout_height="80dp"
-            android:layout_weight="5"
+            android:layout_width="239dp"
+            android:layout_height="57dp"
+            android:contentDescription="@string/todo"
+            android:cropToPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/screenshot_2024_03_14_170407" />
 
         <Button
             android:id="@+id/btnDeconnexion"
-            android:layout_width="50dp"
-            android:layout_height="80dp"
-            android:layout_weight="2"
-            android:text="@string/btn_Deconexion" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/btn_Deconexion"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/tvBonjour"

@@ -10,9 +10,10 @@
         android:id="@+id/btnParcourtRecetteMain"
         android:layout_width="297dp"
         android:layout_height="48dp"
-        android:layout_marginTop="392dp"
+        android:layout_marginTop="396dp"
         android:text="@string/voir_Recettes"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,10 +21,11 @@
         android:id="@+id/textView"
         android:layout_width="355dp"
         android:layout_height="51dp"
-        android:layout_marginStart="28dp"
         android:layout_marginTop="276dp"
         android:fontFamily="sans-serif-black"
+        android:gravity="center_horizontal"
         android:text="@string/descriptionMenu"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextSizeCheck" />
@@ -58,9 +60,9 @@
         android:id="@+id/imageView"
         android:layout_width="180dp"
         android:layout_height="118dp"
-        android:layout_marginStart="112dp"
         android:layout_marginTop="136dp"
         android:contentDescription="@string/todo"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/screenshot_2024_03_14_170416"
@@ -70,20 +72,21 @@
         android:id="@+id/imageView2"
         android:layout_width="152dp"
         android:layout_height="52dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:contentDescription="@string/todoo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.108"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/screenshot_2024_03_14_170407"
-        android:contentDescription="@string/todoo" />
+        app:srcCompat="@drawable/screenshot_2024_03_14_170407" />
 
     <Button
         android:id="@+id/btnCreerCompteMain"
         android:layout_width="297dp"
         android:layout_height="48dp"
-        android:layout_marginStart="56dp"
         android:layout_marginTop="340dp"
         android:text="@string/Connexion_Inscription"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextSizeCheck" />

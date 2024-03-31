@@ -19,37 +19,44 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="177dp"
                 android:layout_height="35dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="80dp"
-                android:layout_marginLeft="30dp"
-                app:srcCompat="@drawable/screenshot_2024_03_14_170407" />
+                android:contentDescription="@string/todo"
+                app:srcCompat="@drawable/screenshot_2024_03_14_170407"
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="148dp"
                 android:layout_height="85dp"
+                android:layout_marginStart="40dp"
                 android:layout_marginTop="50dp"
-                android:layout_marginLeft="40dp"
-                app:srcCompat="@drawable/screenshot_2024_03_14_170416" />
+                android:contentDescription="@string/todo"
+                app:srcCompat="@drawable/screenshot_2024_03_14_170416"
+                tools:ignore="ContentDescription" />
         </LinearLayout>
-        <TextView
-            android:layout_marginLeft="40dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:text="Bienvenue sur ChefChatter!"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
+            android:layout_marginStart="40dp"
+            android:text="@string/bienvenue_sur_chefchatter"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="TextSizeCheck" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="20dp"
-            android:text="Veuillez vous connecter"
+            android:text="@string/veuillez_vous_connecter"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -66,58 +73,78 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/username"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="Nom d'utilisateur"
+                android:hint="@string/nom_d_utilisateur"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/inputNomUtilisateurMain2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/password"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="Mot de passe"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
+                android:hint="@string/mot_de_passe"
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/inputMdpMain2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btnMdpOublieMain2"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:layout_gravity="right"
                 android:layout_marginTop="10dp"
                 android:background="#00000000"
-                android:text="Mot de passe oublié?"
-                android:textColor="#000" />
+                android:text="@string/mot_de_passe_oubli"
+                android:textColor="@color/black"
+                tools:ignore="RtlHardcoded,TextContrastCheck" />
 
             <Button
                 android:id="@+id/btnSeConnecterMain2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Se connecter" />
+                android:text="@string/se_connecter" />
 
             <Button
                 android:id="@+id/btnPasCompteMain2"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="10dp"
                 android:background="#00000000"
-                android:text="Pas de compte?"
-                android:textColor="#000" />
+                android:text="@string/Connexion_Inscription"
+                android:textColor="#000"
+                tools:ignore="TextContrastCheck" />
         </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="251dp">
+
+            <Button
+                android:id="@+id/btnRetourActMain2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:text="@string/retour"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.103"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </LinearLayout>

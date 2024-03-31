@@ -8,8 +8,9 @@ import android.widget.DatePicker;
 import java.util.Calendar;
 import android.os.Bundle;
 
-public class MainActivity3 extends AppCompatActivity {
+public class MainActivity3 extends AppCompatActivity implements View.OnClickListener{
     private Button btnSelectDate;
+    private Button btnRetour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +18,8 @@ public class MainActivity3 extends AppCompatActivity {
         setContentView(R.layout.activity_main3);
 
         btnSelectDate = findViewById(R.id.btnDateNaissanceMain3);
+        btnRetour = findViewById(R.id.btnRetourMain3);
+        btnRetour.setOnClickListener(this);
 
         btnSelectDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +41,14 @@ public class MainActivity3 extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+
     }
 
+
+    @Override
+    public void onClick(View v) {
+        if(v == btnRetour){
+            finish();
+        }
+    }
 }
