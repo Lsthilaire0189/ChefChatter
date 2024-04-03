@@ -37,7 +37,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="436dp"
             android:layout_marginTop="40dp"
             android:orientation="vertical">
 
@@ -103,6 +103,19 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputNomUtilisateurMain3"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="@string/nom_d_utilisateur"
+                    android:textColorHint="#546E7A"
+                    tools:ignore="TextContrastCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -119,13 +132,31 @@
                     tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="match_parent"
+            android:layout_height="92dp">
+
             <Button
                 android:id="@+id/btnRetourMain3"
-                android:layout_width="wrap_content"
+                android:layout_width="107dp"
                 android:layout_height="48dp"
-                android:layout_marginTop="50dp"
-                android:text="@string/retourMain3" />
-        </LinearLayout>
+                android:layout_marginBottom="20dp"
+                android:text="@string/retourMain3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/btnConfirmerAct3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="@string/confirmer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

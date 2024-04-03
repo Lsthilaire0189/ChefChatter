@@ -22,14 +22,21 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <Button
-                android:id="@+id/btnRetourRP"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_marginTop="10dp"
-                android:background="#00000000"
-                android:text="@string/retourRP"
-                android:textColor="#000" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnRetourRP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#00000000"
+                    android:text="@string/retourRP"
+                    android:textColor="#000" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvNomRecetteRP"
@@ -156,6 +163,7 @@
                     android:layout_height="400dp"
                     tools:ignore="NestedScrolling" />
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

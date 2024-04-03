@@ -49,4 +49,5 @@
     <string name="nom_d_utilisateur">Nom d\'utilisateur</string>
     <string name="r_initialisation_du_mot_de_passe">Réinitialisation du mot de passe</string>
     <string name="veuillez_saisir_v_tre_adresse_courriel_afin_de_le_r_initialiser">Veuillez saisir vôtre adresse courriel afin de le réinitialiser</string>
+    <string name="confirmer">Confirmer</string>
 </resources>
