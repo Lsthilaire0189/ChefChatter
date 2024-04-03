@@ -65,7 +65,7 @@ public class MainActivity3 extends AppCompatActivity implements View.OnClickList
                             @Override
                             public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                                 // Use the selected date (Note: Month is 0-indexed)
-                                dateNaissance= dateNaissance = selectedYear + "-" + (selectedMonth + 1) + "-" + selectedDay;
+                                dateNaissance= selectedYear + "-" + "0"+(selectedMonth + 1) + "-" + "0"+selectedDay;
                             }
                         }, year, month, day);
 
@@ -97,12 +97,12 @@ public class MainActivity3 extends AppCompatActivity implements View.OnClickList
         JSONObject obj = new JSONObject();
         Compte compte = new Compte(prenom.getText().toString(), nom.getText().toString(), courriel.getText().toString(), nomUtilisateur.getText().toString(), dateNaissance, mdp.getText().toString());
         try {
+            obj.put("email", compte.getCourriel());
+            obj.put("username", compte.getNomUtilisateur());
+            obj.put("password", compte.getMdp());
             obj.put("prenom", compte.getPrenom());
-            obj.put("nom", compte.getNom());
-            obj.put("courriel", compte.getCourriel());
-            obj.put("nomUtilisateur", compte.getNomUtilisateur());
-            obj.put("dateNaissance", compte.getDateNaissance());
-            obj.put("mdp", compte.getMdp());
+            obj.put("nomdeDeFamille", compte.getNom());
+            obj.put("dateDeNaissance", compte.getDateNaissance());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -113,6 +113,7 @@ public class MainActivity3 extends AppCompatActivity implements View.OnClickList
             response = okHttpClient.newCall(request).execute();
         } catch (IOException e) {
             e.printStackTrace();
+
         }
         if (response.code() == 201) {
             System.out.println("Compte inséré avec succès");
