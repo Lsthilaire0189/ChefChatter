@@ -99,9 +99,9 @@ public class MainActivity3 extends AppCompatActivity implements View.OnClickList
         try {
             obj.put("email", compte.getCourriel());
             obj.put("username", compte.getNomUtilisateur());
-            obj.put("password", compte.getMdp());
             obj.put("prenom", compte.getPrenom());
             obj.put("nomdeDeFamille", compte.getNom());
+            obj.put("password", compte.getMdp());
             obj.put("dateDeNaissance", compte.getDateNaissance());
         } catch (Exception e) {
             e.printStackTrace();
@@ -111,6 +111,12 @@ public class MainActivity3 extends AppCompatActivity implements View.OnClickList
         Response response = null;
         try {
             response = okHttpClient.newCall(request).execute();
+            if (response.isSuccessful()) {
+                String responseBody = response.body().string();
+                System.out.println("Response Body: " + responseBody);
+            } else {
+                System.out.println("Request not successful. Response Code: " + response.code());
+            }
         } catch (IOException e) {
             e.printStackTrace();
 
