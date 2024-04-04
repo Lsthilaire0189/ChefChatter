@@ -65,7 +65,7 @@ public class MainActivity3 extends AppCompatActivity implements View.OnClickList
                             @Override
                             public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
                                 // Use the selected date (Note: Month is 0-indexed)
-                                dateNaissance= selectedYear + "-" + "0"+(selectedMonth + 1) + "-" + "0"+selectedDay;
+                                dateNaissance= selectedYear + "-" + (selectedMonth + 1) + "-" + selectedDay;
                             }
                         }, year, month, day);
 
@@ -99,10 +99,10 @@ public class MainActivity3 extends AppCompatActivity implements View.OnClickList
         try {
             obj.put("email", compte.getCourriel());
             obj.put("username", compte.getNomUtilisateur());
-            obj.put("prenom", compte.getPrenom());
-            obj.put("nomdeDeFamille", compte.getNom());
             obj.put("password", compte.getMdp());
-            obj.put("dateDeNaissance", compte.getDateNaissance());
+            obj.put("prenom", compte.getPrenom());
+            obj.put("nom", compte.getNom());
+            obj.put("dateNaissance", compte.getDateNaissance());
         } catch (Exception e) {
             e.printStackTrace();
         }
