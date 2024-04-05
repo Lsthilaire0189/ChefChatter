@@ -7,9 +7,11 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import java.util.Calendar;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import okhttp3.MediaType;
@@ -26,13 +28,13 @@ public class MainActivity3 extends AppCompatActivity implements View.OnClickList
 
     private Button btnConfirmer;
 
-    TextInputEditText prenom;
-    TextInputEditText nom;
-    TextInputEditText courriel;
-    TextInputEditText nomUtilisateur;
-    TextInputEditText mdp;
+    private TextInputEditText prenom;
+    private TextInputEditText nom;
+    private TextInputEditText courriel;
+    private TextInputEditText nomUtilisateur;
+    private TextInputEditText mdp;
 
-    String dateNaissance;
+    private String dateNaissance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,14 +85,15 @@ public class MainActivity3 extends AppCompatActivity implements View.OnClickList
         } else if (v == btnConfirmer) {
             (new Thread() {
                 public void run() {
-                    requetePost();
+                    requeteCreationCompte();
                 }
             }).start();
 
         }
     }
 
-    private void requetePost () {
+    private void requeteCreationCompte() {
+
         final String URL_POINT_ENTREE = "https://equipe500.tch099.ovh/projet1/api";
         OkHttpClient okHttpClient = new OkHttpClient();
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
@@ -108,23 +111,31 @@ public class MainActivity3 extends AppCompatActivity implements View.OnClickList
         }
         RequestBody corpsRequete = RequestBody.create(String.valueOf(obj), JSON);
         Request request = new Request.Builder().url(URL_POINT_ENTREE + "/ajouterCompte").post(corpsRequete).build();
-        Response response = null;
+
+
         try {
-            response = okHttpClient.newCall(request).execute();
+            Response response = okHttpClient.newCall(request).execute();
             if (response.isSuccessful()) {
                 String responseBody = response.body().string();
-                System.out.println("Response Body: " + responseBody);
+                JSONObject jsonResponse = new JSONObject(responseBody);
+                String message = jsonResponse.getString("message");
+
+                // Display the message in a Toast on the UI thread
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                finish();
             } else {
                 System.out.println("Request not successful. Response Code: " + response.code());
             }
-        } catch (IOException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
+        }
 
-        }
-        if (response.code() == 201) {
-            System.out.println("Compte inséré avec succès");
-        } else {
-            System.out.println("Erreur lors de l'insertion du compte");
-        }
     }
+
 }

@@ -72,23 +72,22 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/username"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="@string/nom_d_utilisateur"
+                android:hint="@string/adresse_courrielMain3"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="60dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputNomUtilisateurMain2"
+                    android:id="@+id/inputAdrCourrielMain2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+                    android:layout_height="50dp"
+                    android:textColorHint="#546E7A"
+                    tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/password"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="60dp"
                 android:layout_marginTop="20dp"
                 android:hint="@string/mot_de_passe"
                 app:passwordToggleEnabled="true">
@@ -96,9 +95,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/inputMdpMain2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+                    android:layout_height="50dp"
+                    android:textColorHint="#546E7A"
+                    tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
