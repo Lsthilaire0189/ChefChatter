@@ -18,7 +18,8 @@
             android:id="@+id/btnHome"
             android:layout_width="39dp"
             android:layout_height="42dp"
-            android:src="@drawable/homeimage" />
+            android:src="@drawable/homeimage"
+            android:importantForAccessibility="no" />
 
         <TextView
             android:id="@+id/tvRecherche"
@@ -29,34 +30,37 @@
             android:id="@+id/btnRet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Retour" />
+            android:text="@string/retour" />
 
         <TextView
             android:id="@+id/tvFiltre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Filtres de recherches" />
+            android:text="@string/filtres_de_recherches" />
 
         <Spinner
             android:id="@+id/sChoixOrigine"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:minHeight="48dp" />
 
         <Spinner
             android:id="@+id/sChoixRegime"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:minHeight="48dp" />
 
         <Spinner
             android:id="@+id/sChoixType"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:minHeight="48dp" />
 
         <Button
             android:id="@+id/btnRecherche"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rechercher" />
+            android:text="@string/rechercher" />
 
         <ListView
             android:id="@+id/lvFiltre"

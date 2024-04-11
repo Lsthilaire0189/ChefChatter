@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_choice_origine">
+        <item>Veuillez sélectionner un pays</item>
+        <item>Grec</item>
+        <item>Algerien</item>
+        <item>Irlandais</item>
+        <item>États-Unis</item>
+        <item>Français</item>
+        <item>Espagnole</item>
+        <item>Mexicain</item>
+        <item>Chinois</item>
+    </string-array>
+</resources>

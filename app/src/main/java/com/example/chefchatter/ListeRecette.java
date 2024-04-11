@@ -2,6 +2,7 @@ package com.example.chefchatter;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -47,6 +48,21 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        origine = findViewById(R.id.sChoixOrigine);
+        regime = findViewById(R.id.sChoixRegime);
+        type = findViewById(R.id.sChoixType);
+
+        ArrayAdapter<CharSequence> adapterOrigine = ArrayAdapter.createFromResource(this, R.array.spinner_choice_origine, android.R.layout.simple_spinner_item);
+        adapterOrigine.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        origine.setAdapter(adapterOrigine);
+
+        ArrayAdapter<CharSequence> adapterRegime = ArrayAdapter.createFromResource(this, R.array.spinner_choice_regime, android.R.layout.simple_spinner_item);
+        adapterRegime.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        regime.setAdapter(adapterRegime);
+
+        ArrayAdapter<CharSequence> adapterType = ArrayAdapter.createFromResource(this, R.array.spinner_choice_type, android.R.layout.simple_spinner_item);
+        adapterType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        type.setAdapter(adapterType);
 
         listeRecette = findViewById(R.id.lvFiltre);
 
@@ -63,9 +79,7 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
             finish();
         }
         else if(v == btnRechercher){
-            origine = findViewById(R.id.sChoixOrigine);
-            regime = findViewById(R.id.sChoixRegime);
-            type = findViewById(R.id.sChoixType);
+
             Filtre filtre = new Filtre(origine.getSelectedItem().toString(), regime.getSelectedItem().toString(), type.getSelectedItem().toString());
             (new Thread() {
                 public void run() {

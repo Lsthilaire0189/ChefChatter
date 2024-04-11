@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner_choice_type">
+        <item>Veuillez sélectionner un type de plat</item>
+        <item>Poulet</item>
+        <item>Boeuf</item>
+        <item>Porc</item>
+        <item>Poisson</item>
+        <item>Pâtisserie</item>
+        <item>Salade</item>
+        <item>Pâtes</item>
+    </string-array>
+</resources>
