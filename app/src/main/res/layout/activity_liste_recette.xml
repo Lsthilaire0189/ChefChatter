@@ -1,54 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ListeRecette">
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="403dp"
-        android:layout_height="699dp"
-        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/btnHome"
+            android:layout_width="39dp"
+            android:layout_height="42dp"
+            android:src="@drawable/homeimage" />
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/liste_des_recettes" />
-
-        <EditText
-            android:id="@+id/inputChercherRecette"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="30dp"
-            android:autofillHints=""
-            android:hint="@string/rechercher"
-            android:inputType="text"
-            android:minHeight="48dp"
-            android:textColorHint="#546E7A"
-            tools:ignore="TextFields" />
-
-        <ListView
-            android:id="@+id/lvListeRecette"
-            android:layout_width="match_parent"
-            android:layout_height="510dp">
-
-        </ListView>
+            android:id="@+id/tvRecherche"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/btnAnnulerLR"
-            android:layout_width="109dp"
-            android:layout_height="45dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:minHeight="48dp"
-            android:text="@string/annuler"
-            tools:ignore="TouchTargetSizeCheck" />
+            android:id="@+id/btnRet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Retour" />
+
+        <TextView
+            android:id="@+id/tvFiltre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Filtres de recherches" />
+
+        <Spinner
+            android:id="@+id/sChoixOrigine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/sChoixRegime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/sChoixType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btnRecherche"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rechercher" />
+
+        <ListView
+            android:id="@+id/lvFiltre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

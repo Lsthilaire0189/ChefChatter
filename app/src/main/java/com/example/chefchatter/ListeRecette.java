@@ -3,6 +3,9 @@ package com.example.chefchatter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,9 +13,29 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class ListeRecette extends AppCompatActivity implements View.OnClickListener{
 
     private Button btnRetour;
+    private Button btnRechercher;
+
+    private ListView listeRecette;
+
+    private Spinner origine;
+    private Spinner regime;
+    private Spinner type;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +48,12 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
             return insets;
         });
 
-        btnRetour = findViewById(R.id.btnAnnulerLR);
+        listeRecette = findViewById(R.id.lvFiltre);
+
+        btnRechercher = findViewById(R.id.btnRecherche);
+        btnRechercher.setOnClickListener(this);
+
+        btnRetour = findViewById(R.id.btnRet);
         btnRetour.setOnClickListener(this);
     }
 
@@ -34,5 +62,58 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
         if(v == btnRetour){
             finish();
         }
+        else if(v == btnRechercher){
+            origine = findViewById(R.id.sChoixOrigine);
+            regime = findViewById(R.id.sChoixRegime);
+            type = findViewById(R.id.sChoixType);
+            Filtre filtre = new Filtre(origine.getSelectedItem().toString(), regime.getSelectedItem().toString(), type.getSelectedItem().toString());
+            (new Thread() {
+                public void run() {
+                    RequeteFiltre(filtre);
+                }
+            }).start();
+        }
+    }
+    private void RequeteFiltre(Filtre filtre){
+        final String URL_POINT_ENTREE = "https://equipe500.tch099.ovh/projet1/api";
+        OkHttpClient okHttpClient = new OkHttpClient();
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("ChoixOrigine", filtre.getChoixOrigine());
+            obj.put("ChoixRegime", filtre.getChoixRegime());
+            obj.put("ChoixType", filtre.getChoixType());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        RequestBody corpsRequete = RequestBody.create(String.valueOf(obj), JSON);
+        Request request = new Request.Builder().url(URL_POINT_ENTREE + "/filtrer").post(corpsRequete).build();
+
+        try {
+            Response response = okHttpClient.newCall(request).execute();
+            if (response.isSuccessful()) {
+
+                String responseBody = response.body().string();
+                JSONArray jsonResponse = new JSONArray(responseBody);
+
+                // Loop through the array of results
+                for (int i = 0; i < jsonResponse.length(); i++) {
+                    JSONObject result = jsonResponse.getJSONObject(i);
+                    // Access each field in the result
+                    String email = result.getString("email");
+                    String prenom = result.getString("prenom");
+                    // ... access other fields as needed ...
+                }
+
+
+                finish();
+            } else {
+                System.out.println("Request not successful. Response Code: " + response.code());
+            }
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 }
