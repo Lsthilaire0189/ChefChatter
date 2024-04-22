@@ -94,9 +94,16 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         JSONObject obj = new JSONObject();
         try {
+<<<<<<< HEAD
             obj.put("origine", filtre.getChoixOrigine()); // Changed key to match PHP
             obj.put("regime", filtre.getChoixRegime());   // Changed key to match PHP
             obj.put("type", filtre.getChoixType());       // Changed key to match PHP
+=======
+            obj.put("origine", filtre.getChoixOrigine());
+            obj.put("regime", filtre.getChoixRegime());
+            obj.put("type", filtre.getChoixType());
+
+>>>>>>> 1d40b1900dacdc26dea22d57bd123f6201a6019f
         } catch (Exception e) {
             e.printStackTrace();
         }
