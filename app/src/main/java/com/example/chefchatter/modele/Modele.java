@@ -16,7 +16,7 @@ public class Modele {
         this.recettes = recettes;
     }
 
-    public Recette getRecette(int id) {
+    public Recette getRecetteSelonId(int id) {
         for (Recette recette : this.recettes)
             if (recette.getId() == id)
                 return recette;

@@ -13,9 +13,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.chefchatter.dao.RecettesCallback;
 import com.example.chefchatter.modele.Filtre;
 import com.example.chefchatter.R;
 import com.example.chefchatter.modele.Recette;
+import com.example.chefchatter.presentateur.AdapteurRecette;
 import com.example.chefchatter.presentateur.PresentateurRecette;
 
 import java.util.List;
@@ -32,6 +34,7 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
     private Spinner type;
     PresentateurRecette presentateurRecette;
     List<Recette> recettes;
+    private AdapteurRecette adaptateur;
 
 
     @Override
@@ -69,6 +72,10 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
         btnRetour.setOnClickListener(this);
 
         presentateurRecette = new PresentateurRecette(this);
+
+        adaptateur = new AdapteurRecette(this,
+                R.layout.compte_layout,presentateurRecette);
+        lvComptes.setAdapter(adaptateur);
     }
 
     @Override
@@ -79,9 +86,17 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
         else if(v == btnRechercher){
 
             Filtre filtre = new Filtre(origine.getSelectedItem().toString(), regime.getSelectedItem().toString(), type.getSelectedItem().toString());
-            presentateurRecette.obtenirRecettes(filtre);
-            recettes = presentateurRecette.getRecettes();
-        }
+            presentateurRecette.obtenirRecettes(filtre ,new RecettesCallback() {
+                @Override
+                public void onRecettesReceived(List<Recette> recettes) {
+                    // This code will be executed when the network request completes
+                   // ListeRecette.this.recettes = recettes;
+                    // Update your UI here
+                    ListeRecette.this.recettes = presentateurRecette.getRecettes();
+                }
+
+            });
+
     }
 //    private void RequeteFiltre(Filtre filtre){
 //        final String URL_POINT_ENTREE = "https://equipe500.tch099.ovh/projet1/api";
@@ -123,5 +138,5 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
 //            e.printStackTrace();
 //        }
 //
-//    }
+ }
 }

@@ -3,6 +3,7 @@ package com.example.chefchatter.presentateur;
 import android.app.Activity;
 
 import com.example.chefchatter.dao.DAO;
+import com.example.chefchatter.dao.RecettesCallback;
 import com.example.chefchatter.modele.Filtre;
 import com.example.chefchatter.modele.Modele;
 import com.example.chefchatter.modele.ModeleManager;
@@ -28,7 +29,7 @@ public class PresentateurRecette {
         return modele.getRecettes();
     }
 
-    public void obtenirRecettes(Filtre filtre) {
+    public void obtenirRecettes(Filtre filtre, RecettesCallback callback) {
         new Thread(){
             @Override
             public void run() {
@@ -42,6 +43,12 @@ public class PresentateurRecette {
                 }
             }
         }.start();
+    }
+    public int getNbRecettes() {
+        return modele.getRecettes().size();
+    }
+    public Recette getRecette(int position) {
+        return modele.getRecettes().get(position);
     }
 
 }
