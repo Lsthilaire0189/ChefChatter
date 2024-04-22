@@ -1,4 +1,4 @@
-package com.example.chefchatter;
+package com.example.chefchatter.modele;
 
 public class Filtre {
     private String choixOrigine;

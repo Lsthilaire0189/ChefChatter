@@ -1,4 +1,4 @@
-package com.example.chefchatter;
+package com.example.chefchatter.activites;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
@@ -9,6 +9,8 @@ import java.util.Calendar;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.chefchatter.modele.Compte;
+import com.example.chefchatter.R;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;

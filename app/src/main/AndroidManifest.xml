@@ -16,26 +16,26 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".recettePage"
+            android:name=".activites.recettePage"
             android:exported="false" />
         <activity
-            android:name=".ListeRecette"
+            android:name=".activites.ListeRecette"
             android:exported="false" />
         <activity
-            android:name=".AffichageRecette"
+            android:name=".activites.AffichageRecette"
             android:exported="false" />
         <activity
-            android:name=".MainActivity3"
+            android:name=".activites.MainActivity3"
             android:exported="false" />
         <activity
-            android:name=".MainActivity2"
+            android:name=".activites.MainActivity2"
             android:exported="false" />
-        <activity android:name=".ActionActivity"
+        <activity android:name=".activites.ActionActivity"
             android:exported="false" />
-        <activity android:name=".MdpOublie"
+        <activity android:name=".activites.MdpOublie"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activites.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

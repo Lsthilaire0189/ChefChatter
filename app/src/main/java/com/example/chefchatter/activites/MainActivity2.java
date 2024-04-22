@@ -1,4 +1,4 @@
-package com.example.chefchatter;
+package com.example.chefchatter.activites;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.chefchatter.modele.Compte;
+import com.example.chefchatter.R;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;

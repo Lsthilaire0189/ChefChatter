@@ -1,4 +1,4 @@
-package com.example.chefchatter;
+package com.example.chefchatter.activites;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,7 +6,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,17 +13,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.chefchatter.modele.Filtre;
+import com.example.chefchatter.R;
+import com.example.chefchatter.modele.Recette;
+import com.example.chefchatter.presentateur.PresentateurRecette;
 
-import java.io.IOException;
-
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
+import java.util.List;
 
 public class ListeRecette extends AppCompatActivity implements View.OnClickListener{
 
@@ -36,6 +30,8 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
     private Spinner origine;
     private Spinner regime;
     private Spinner type;
+    PresentateurRecette presentateurRecette;
+    List<Recette> recettes;
 
 
     @Override
@@ -71,6 +67,8 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
 
         btnRetour = findViewById(R.id.btnRet);
         btnRetour.setOnClickListener(this);
+
+        presentateurRecette = new PresentateurRecette(this);
     }
 
     @Override
@@ -81,57 +79,49 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
         else if(v == btnRechercher){
 
             Filtre filtre = new Filtre(origine.getSelectedItem().toString(), regime.getSelectedItem().toString(), type.getSelectedItem().toString());
-            (new Thread() {
-                public void run() {
-                    RequeteFiltre(filtre);
-                }
-            }).start();
+            presentateurRecette.obtenirRecettes(filtre);
+            recettes = presentateurRecette.getRecettes();
         }
     }
-    private void RequeteFiltre(Filtre filtre){
-        final String URL_POINT_ENTREE = "https://equipe500.tch099.ovh/projet1/api";
-        OkHttpClient okHttpClient = new OkHttpClient();
-        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        JSONObject obj = new JSONObject();
-        try {
-<<<<<<< HEAD
-            obj.put("origine", filtre.getChoixOrigine()); // Changed key to match PHP
-            obj.put("regime", filtre.getChoixRegime());   // Changed key to match PHP
-            obj.put("type", filtre.getChoixType());       // Changed key to match PHP
-=======
-            obj.put("origine", filtre.getChoixOrigine());
-            obj.put("regime", filtre.getChoixRegime());
-            obj.put("type", filtre.getChoixType());
-
->>>>>>> 1d40b1900dacdc26dea22d57bd123f6201a6019f
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        RequestBody corpsRequete = RequestBody.create(String.valueOf(obj), JSON); // Use obj.toString()
-        Request request = new Request.Builder().url(URL_POINT_ENTREE + "/filtrer").post(corpsRequete).build();
-
-
-        try {
-            Response response = okHttpClient.newCall(request).execute();
-
-            if (response.isSuccessful()) {
-                String responseBody = response.body().string();
-                JSONArray jsonResponse = new JSONArray(responseBody);
-
-                // Loop through the array of results
-                for (int i = 0; i < jsonResponse.length(); i++) {
-                    JSONObject result = jsonResponse.getJSONObject(i);
-
-                }
-
-
-                finish();
-            } else {
-                System.out.println("Request not successful. Response Code: " + response.code());
-            }
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
+//    private void RequeteFiltre(Filtre filtre){
+//        final String URL_POINT_ENTREE = "https://equipe500.tch099.ovh/projet1/api";
+//        OkHttpClient okHttpClient = new OkHttpClient();
+//        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+//        JSONObject obj = new JSONObject();
+//        try {
+//            obj.put("origine", filtre.getChoixOrigine()); // Changed key to match PHP
+//            obj.put("regime", filtre.getChoixRegime());   // Changed key to match PHP
+//            obj.put("type", filtre.getChoixType());       // Changed key to match PHP
+//
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        RequestBody corpsRequete = RequestBody.create(String.valueOf(obj), JSON); // Use obj.toString()
+//        Request request = new Request.Builder().url(URL_POINT_ENTREE + "/filtrer").post(corpsRequete).build();
+//
+//
+//        try {
+//            Response response = okHttpClient.newCall(request).execute();
+//
+//            if (response.isSuccessful()) {
+//                String responseBody = response.body().string();
+//                JSONArray jsonResponse = new JSONArray(responseBody);
+//
+//                // Loop through the array of results
+//                for (int i = 0; i < jsonResponse.length(); i++) {
+//                    JSONObject result = jsonResponse.getJSONObject(i);
+//
+//                }
+//
+//
+//                finish();
+//            } else {
+//                System.out.println("Request not successful. Response Code: " + response.code());
+//            }
+//        } catch (IOException | JSONException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 }

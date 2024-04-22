@@ -1,4 +1,4 @@
-package com.example.chefchatter;
+package com.example.chefchatter.activites;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.chefchatter.R;
+import com.example.chefchatter.activites.ActionActivity;
+import com.example.chefchatter.activites.ListeRecette;
 
 public class AffichageRecette extends AppCompatActivity implements View.OnClickListener{
 
