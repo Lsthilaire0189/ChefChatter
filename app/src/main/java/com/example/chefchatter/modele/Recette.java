@@ -23,17 +23,19 @@ public class Recette {
     @JsonProperty("email")
     private String email;
     @JsonProperty("preparation")
-    private int preparation;
+    private Integer preparation;
     @JsonProperty("cuisson")
-    private int cuisson;
+    private Integer cuisson;
     @JsonProperty("portion")
-    private int portion;
+    private Integer portion;
+    @JsonProperty("prenom")
+    private String prenom;
 
     public Recette() {
         // Default constructor
     }
 
-    public Recette(int id, String nom, String origine, String regime, String type, String description, String etape, String src, String email, int preparation, int cuisson, int portion) {
+    public Recette(int id, String nom, String origine, String regime, String type, String description, String etape, String src, String email, Integer preparation, Integer cuisson, Integer portion, String prenom) {
         this.id = id;
         this.nom = nom;
         this.origine = origine;
@@ -46,6 +48,7 @@ public class Recette {
         this.preparation = preparation;
         this.cuisson = cuisson;
         this.portion = portion;
+        this.prenom = prenom;
     }
 
     public int getId() {
@@ -142,5 +145,13 @@ public class Recette {
 
     public void setPortion(int portion) {
         this.portion = portion;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
     }
 }

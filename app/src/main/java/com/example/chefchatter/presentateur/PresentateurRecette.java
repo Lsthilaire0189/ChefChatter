@@ -29,7 +29,6 @@ public class PresentateurRecette {
     }
 
     public void obtenirRecettes(Filtre filtre) {
-        modele = ModeleManager.getInstance();
         new Thread(){
             @Override
             public void run() {
