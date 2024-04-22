@@ -94,30 +94,27 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         JSONObject obj = new JSONObject();
         try {
-            obj.put("ChoixOrigine", filtre.getChoixOrigine());
-            obj.put("ChoixRegime", filtre.getChoixRegime());
-            obj.put("ChoixType", filtre.getChoixType());
-
+            obj.put("origine", filtre.getChoixOrigine()); // Changed key to match PHP
+            obj.put("regime", filtre.getChoixRegime());   // Changed key to match PHP
+            obj.put("type", filtre.getChoixType());       // Changed key to match PHP
         } catch (Exception e) {
             e.printStackTrace();
         }
-        RequestBody corpsRequete = RequestBody.create(String.valueOf(obj), JSON);
+        RequestBody corpsRequete = RequestBody.create(String.valueOf(obj), JSON); // Use obj.toString()
         Request request = new Request.Builder().url(URL_POINT_ENTREE + "/filtrer").post(corpsRequete).build();
+
 
         try {
             Response response = okHttpClient.newCall(request).execute();
-            if (response.isSuccessful()) {
 
+            if (response.isSuccessful()) {
                 String responseBody = response.body().string();
                 JSONArray jsonResponse = new JSONArray(responseBody);
 
                 // Loop through the array of results
                 for (int i = 0; i < jsonResponse.length(); i++) {
                     JSONObject result = jsonResponse.getJSONObject(i);
-                    // Access each field in the result
-                    String email = result.getString("email");
-                    String prenom = result.getString("prenom");
-                    // ... access other fields as needed ...
+
                 }
 
 
