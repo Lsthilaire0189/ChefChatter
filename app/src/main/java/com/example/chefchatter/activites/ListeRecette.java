@@ -1,7 +1,9 @@
 package com.example.chefchatter.activites;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -77,6 +79,22 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
         adaptateur = new AdapteurRecette(this,
                 R.layout.layout_recettes,presentateurRecette);
         listeRecette.setAdapter(adaptateur);
+
+        listeRecette.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent iRecetteDescription = new Intent(getApplicationContext(), DescriptionRecette.class);
+                Recette recetteSelectionnee = (Recette)parent.getAdapter().getItem(position);
+                String src = recetteSelectionnee.getSrc();
+                String nom = recetteSelectionnee.getNom();
+                Integer tempsCuisson = recetteSelectionnee.getCuisson();
+                Integer tempsPreparation = recetteSelectionnee.getPreparation();
+                Integer portions = recetteSelectionnee.getPortion();
+                String ingredients = recetteSelectionnee.getIngredients();
+                String etape = recetteSelectionnee.getEtape();
+
+            }
+        });
     }
 
     @Override
