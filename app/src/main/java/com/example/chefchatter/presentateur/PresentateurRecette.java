@@ -53,6 +53,7 @@ public class PresentateurRecette {
             }
         }.start();
     }
+
     public int getNbRecettes() {
         return modele.getRecettes().size();
     }

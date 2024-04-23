@@ -36,6 +36,9 @@
             android:exported="false" />
         <activity android:name=".activites.DescriptionRecette"
             android:exported="false" />
+        <activity android:name=". activites.ModifierCompteActivity"
+            android:exported="false" />
+
         <activity
             android:name=".activites.MainActivity"
             android:exported="true">

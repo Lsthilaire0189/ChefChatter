@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/imagetest_copie_2" />
+
+    <Button
+        android:id="@+id/mcBtnRetour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/retour" />
+
+    <TextView
+        android:id="@+id/mcTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Modification du compte" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/mcPtPrenom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Prénom" />
+
+        <EditText
+            android:id="@+id/mcPtNomFamille"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nom de famille" />
+
+        <DatePicker
+            android:id="@+id/mcDateNaissance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/mcPtCourriel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Adresse courriel"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/mcPtNomUtilisateur"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nom d'utilisateur" />
+
+        <EditText
+            android:id="@+id/mcPtpassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mot de passe"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/modifyAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Modifier le compte" />
+
+        <Button
+            android:id="@+id/deleteAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Supprimer le compte" />
+
+    </LinearLayout>
+</LinearLayout>
