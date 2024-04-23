@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@android:color/holo_blue_bright"
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/lrTvNomRecette"
@@ -22,7 +24,7 @@
 
     <ImageView
         android:id="@+id/lrIvPhoto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@tools:sample/avatars" />
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_gravity="center" />
 </LinearLayout>

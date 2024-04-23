@@ -2,6 +2,8 @@ package com.example.chefchatter.presentateur;
 
 import android.app.Activity;
 
+import com.example.chefchatter.activites.ListeRecette;
+import com.example.chefchatter.activites.MainActivity;
 import com.example.chefchatter.dao.DAO;
 import com.example.chefchatter.dao.RecettesCallback;
 import com.example.chefchatter.modele.Filtre;
@@ -38,6 +40,13 @@ public class PresentateurRecette {
                     List<Recette> liste = null;
                     liste = DAO.getRecettes(filtre);
                     modele.setRecettes(liste);
+                    callback.onRecettesReceived(liste);
+                    ((ListeRecette)activity).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ((ListeRecette) activity).raffraichirListe();
+                        }
+                    });
                 } catch (JSONException e) {
                 } catch (IOException e) {
                 }

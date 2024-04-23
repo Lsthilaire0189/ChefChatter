@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -74,8 +75,8 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
         presentateurRecette = new PresentateurRecette(this);
 
         adaptateur = new AdapteurRecette(this,
-                R.layout.compte_layout,presentateurRecette);
-        lvComptes.setAdapter(adaptateur);
+                R.layout.layout_recettes,presentateurRecette);
+        listeRecette.setAdapter(adaptateur);
     }
 
     @Override
@@ -89,54 +90,17 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
             presentateurRecette.obtenirRecettes(filtre ,new RecettesCallback() {
                 @Override
                 public void onRecettesReceived(List<Recette> recettes) {
-                    // This code will be executed when the network request completes
-                   // ListeRecette.this.recettes = recettes;
-                    // Update your UI here
                     ListeRecette.this.recettes = presentateurRecette.getRecettes();
+
                 }
 
             });
 
     }
-//    private void RequeteFiltre(Filtre filtre){
-//        final String URL_POINT_ENTREE = "https://equipe500.tch099.ovh/projet1/api";
-//        OkHttpClient okHttpClient = new OkHttpClient();
-//        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-//        JSONObject obj = new JSONObject();
-//        try {
-//            obj.put("origine", filtre.getChoixOrigine()); // Changed key to match PHP
-//            obj.put("regime", filtre.getChoixRegime());   // Changed key to match PHP
-//            obj.put("type", filtre.getChoixType());       // Changed key to match PHP
-//
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        RequestBody corpsRequete = RequestBody.create(String.valueOf(obj), JSON); // Use obj.toString()
-//        Request request = new Request.Builder().url(URL_POINT_ENTREE + "/filtrer").post(corpsRequete).build();
-//
-//
-//        try {
-//            Response response = okHttpClient.newCall(request).execute();
-//
-//            if (response.isSuccessful()) {
-//                String responseBody = response.body().string();
-//                JSONArray jsonResponse = new JSONArray(responseBody);
-//
-//                // Loop through the array of results
-//                for (int i = 0; i < jsonResponse.length(); i++) {
-//                    JSONObject result = jsonResponse.getJSONObject(i);
-//
-//                }
-//
-//
-//                finish();
-//            } else {
-//                System.out.println("Request not successful. Response Code: " + response.code());
-//            }
-//        } catch (IOException | JSONException e) {
-//            e.printStackTrace();
-//        }
-//
  }
+
+    public void raffraichirListe() {
+        this.adaptateur.notifyDataSetChanged();
+        Toast.makeText(this,adaptateur.getCount()+" comptes",Toast.LENGTH_SHORT).show();
+    }
 }
