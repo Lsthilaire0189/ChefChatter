@@ -71,9 +71,9 @@
             android:id="@+id/btnParcourirRecettes"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="@string/btn_parcourir_recettes"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="5dp"
+            android:text="@string/btn_parcourir_recettes" />
 
         <Button
             android:id="@+id/btnModifierCompte"

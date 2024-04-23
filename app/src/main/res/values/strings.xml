@@ -50,4 +50,12 @@
     <string name="veuillez_saisir_v_tre_adresse_courriel_afin_de_le_r_initialiser">Veuillez saisir vôtre adresse courriel afin de le réinitialiser</string>
     <string name="confirmer">Confirmer</string>
     <string name="filtres_de_recherches">Filtres de recherches</string>
+    <string name="textview">TextView</string>
+    <string name="textviewv2">TextView</string>
+    <string name="chefchatter">CHEFCHATTER</string>
+    <string name="description_du_plat">Description du plat:</string>
+    <string name="ingr_dientsDesc">Ingrédients:</string>
+    <string name="pr_parationDesc">Préparation:</string>
+    <string name="valutation_de_la_recette">Évalutation de la recette</string>
+    <string name="commentaire">Commentaire:</string>
 </resources>

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#003D7E"
     android:orientation="vertical"
-    android:background="@android:color/holo_blue_bright"
     android:padding="16dp">
 
     <TextView
@@ -11,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="TextView"
+        android:text="@string/textview"
+        android:textColor="#FFFFFF"
         android:textSize="16sp" />
 
     <TextView
@@ -19,12 +21,15 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:gravity="center"
-        android:text="TextView"
-        android:textSize="16sp" />
+        android:text="@string/textviewv2"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        tools:ignore="TextSizeCheck" />
 
     <ImageView
         android:id="@+id/lrIvPhoto"
         android:layout_width="125dp"
         android:layout_height="125dp"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:importantForAccessibility="no" />
 </LinearLayout>

@@ -87,11 +87,26 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
                 Recette recetteSelectionnee = (Recette)parent.getAdapter().getItem(position);
                 String src = recetteSelectionnee.getSrc();
                 String nom = recetteSelectionnee.getNom();
+                //ajouter mots clefs
                 Integer tempsCuisson = recetteSelectionnee.getCuisson();
                 Integer tempsPreparation = recetteSelectionnee.getPreparation();
                 Integer portions = recetteSelectionnee.getPortion();
-                String ingredients = recetteSelectionnee.getIngredients();
+                String description = recetteSelectionnee.getDescription();
+                String origine = recetteSelectionnee.getOrigine();
+                String regime = recetteSelectionnee.getRegime();
+                String type = recetteSelectionnee.getType();
                 String etape = recetteSelectionnee.getEtape();
+                iRecetteDescription.putExtra("SRC", src);
+                iRecetteDescription.putExtra("NOM", nom);
+                iRecetteDescription.putExtra("TEMPS_CUISSON", tempsCuisson);
+                iRecetteDescription.putExtra("TEMPS_PREPARATION", tempsPreparation);
+                iRecetteDescription.putExtra("PORTIONS", portions);
+                iRecetteDescription.putExtra("DESCRIPTION", description);
+                iRecetteDescription.putExtra("ORIGINE", origine);
+                iRecetteDescription.putExtra("REGIME", regime);
+                iRecetteDescription.putExtra("TYPE", type);
+                iRecetteDescription.putExtra("ETAPE", etape);
+                startActivity(iRecetteDescription);
 
             }
         });
@@ -108,7 +123,15 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
             presentateurRecette.obtenirRecettes(filtre ,new RecettesCallback() {
                 @Override
                 public void onRecettesReceived(List<Recette> recettes) {
-                    ListeRecette.this.recettes = presentateurRecette.getRecettes();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ListeRecette.this.recettes = presentateurRecette.getRecettes();
+                            adaptateur.clear();
+                            adaptateur.addAll(recettes);
+                            raffraichirListe();
+                        }
+                    });
 
                 }
 

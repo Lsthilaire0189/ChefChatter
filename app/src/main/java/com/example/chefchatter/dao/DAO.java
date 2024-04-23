@@ -13,4 +13,8 @@ public class DAO {
     public static List<Recette> getRecettes(Filtre filtre) throws IOException, JSONException {
         return new HttpJsonService().RequeteFiltre(filtre);
     }
+
+    public static List<String> getIngredientsSelonRecette(Integer idRecette) throws IOException, JSONException {
+        return new HttpJsonService().getIngredientsSelonRecette(idRecette);
+    }
 }

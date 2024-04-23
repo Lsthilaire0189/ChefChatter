@@ -50,10 +50,10 @@ public class AdapteurRecette extends ArrayAdapter {
             final TextView tvPrenomChef = (TextView) view.findViewById(R.id.lrTvPrenomChef);
             final ImageView imageRecette = (ImageView) view.findViewById(R.id.lrIvPhoto);
 
-            tvNomRecette.setText(recette.getNom());
-            tvPrenomChef.setText(recette.getPrenom());
+            tvNomRecette.setText(String.format("Nom de la recette: %s", recette.getNom()));
+            tvPrenomChef.setText(String.format("Chef: %s", recette.getPrenom()));
             Glide.with(this.contexte)
-                    .load(recette.getSrc()) // assuming getSrc() returns the URL of the image
+                    .load(recette.getSrc())
                     .into(imageRecette);
         }
         return view;

@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -49,6 +50,24 @@ public class HttpJsonService {
             return null;
         }
 
+    }
+
+    public List<String> getIngredientsSelonRecette(Integer idRecette) throws IOException, JSONException{
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder().url(URL_POINT_ENTREE + "/recette/" + idRecette + "/ingredients").build();
+        Response response = okHttpClient.newCall(request).execute();
+        String responseBody = response.body().string();
+        if(isValidJSON(responseBody)){
+            JSONArray jsonArray = new JSONArray(responseBody);
+            List<String> ingredients = new ArrayList<>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                ingredients.add(jsonArray.getString(i));
+            }
+            return ingredients;
+        }
+        else{
+            return null;
+        }
     }
 
     private boolean isValidJSON(String test) {
