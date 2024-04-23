@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.chefchatter.R;
 import com.example.chefchatter.modele.Compte;
+import com.example.chefchatter.presentateur.PresentateurCompte;
 import com.example.chefchatter.presentateur.PresentateurRecette;
 
 public class ModifierCompteActivity extends AppCompatActivity implements View.OnClickListener {
@@ -21,7 +22,7 @@ public class ModifierCompteActivity extends AppCompatActivity implements View.On
     private EditText prenom;
     private EditText nom;
     private Button btnRetour;
-    private PresentateurRecette presentateurRecette;
+    private PresentateurCompte presentateurCompte;
     Compte compteModifie;
 
 
@@ -40,7 +41,7 @@ protected void onCreate(Bundle savedInstanceState) {
         btnRetour.setOnClickListener(this);
         compteModifie = new Compte(prenom.getText().toString(), nom.getText().toString(),  courriel.getText().toString(), nomUtilisateur.getText().toString(),String.valueOf(calendarView.getDate()) ,mdp.getText().toString());
 
-        presentateurRecette = new PresentateurRecette(this);
+        presentateurCompte = new PresentateurCompte(this);
 
 
         }
@@ -48,7 +49,7 @@ protected void onCreate(Bundle savedInstanceState) {
 @Override
 public void onClick(View v) {
         if(v.getId() == R.id.mcBtnRetour){
-            presentateurRecette.modifierCompte(compteModifie);
+            presentateurCompte.modifierCompte(compteModifie);
             finish();
         }
 
