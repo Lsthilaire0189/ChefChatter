@@ -157,6 +157,6 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
 
     public void raffraichirListe() {
         this.adaptateur.notifyDataSetChanged();
-        Toast.makeText(this,adaptateur.getCount()+" comptes",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,adaptateur.getCount()+" recettes retrouvées",Toast.LENGTH_SHORT).show();
     }
 }

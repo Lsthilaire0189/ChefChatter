@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -168,6 +169,7 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
                 avis.setRating(rating);
                 avis.setCommentaire(etCommentaire.getText().toString());
                 presentateurAvis.modifAvis(avis);
+                Toast.makeText(this, "Avis modifié", Toast.LENGTH_SHORT).show();
             } else {
                 Avis avis = new Avis();
                 compte = presentateurCompte.getCompte();
