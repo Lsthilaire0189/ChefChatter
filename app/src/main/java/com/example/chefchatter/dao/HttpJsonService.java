@@ -4,6 +4,7 @@ import com.example.chefchatter.modele.Avis;
 import com.example.chefchatter.modele.Compte;
 import com.example.chefchatter.modele.CompteMessage;
 import com.example.chefchatter.modele.Filtre;
+import com.example.chefchatter.modele.Recette_Ingredient;
 import com.example.chefchatter.modele.Recette;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -14,7 +15,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -57,17 +57,14 @@ public class HttpJsonService {
 
     }
 
-    public List<String> getIngredientsSelonRecette(Integer idRecette) throws IOException, JSONException {
+    public List<Recette_Ingredient> getIngredientsSelonRecette(Integer idRecette) throws IOException, JSONException {
         OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder().url(URL_POINT_ENTREE + "/recette/" + idRecette + "/ingredients").build();
+        Request request = new Request.Builder().url(URL_POINT_ENTREE + "/infosRecette/" + idRecette).get().build();
         Response response = okHttpClient.newCall(request).execute();
         String responseBody = response.body().string();
         if (isValidJSON(responseBody)) {
-            JSONArray jsonArray = new JSONArray(responseBody);
-            List<String> ingredients = new ArrayList<>();
-            for (int i = 0; i < jsonArray.length(); i++) {
-                ingredients.add(jsonArray.getString(i));
-            }
+            ObjectMapper objectMapper = new ObjectMapper();
+            List<Recette_Ingredient> ingredients = Arrays.asList(objectMapper.readValue(responseBody, Recette_Ingredient[].class));
             return ingredients;
         } else {
             return null;

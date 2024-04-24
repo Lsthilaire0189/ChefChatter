@@ -1,14 +1,12 @@
 package com.example.chefchatter.modele;
 
-import com.example.chefchatter.modele.Recette;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Modele {
     private List<Recette> recettes = new ArrayList<>();
 
-    private List<String> ingredients = new ArrayList<>();
+    private List<Recette_Ingredient> ingredients = new ArrayList<>();
 
     public List<Recette> getRecettes() {
         return recettes;
@@ -21,7 +19,7 @@ public class Modele {
     Compte compteCourrant ;
 
 
-    public List<String> getIngredients() {
+    public List<Recette_Ingredient> getIngredients() {
         return ingredients;
     }
 
@@ -32,7 +30,7 @@ public class Modele {
         this.compteCourrant = compteCourrant;
     }
 
-    public void setIngredients(List<String> ingredients) {
+    public void setIngredients(List<Recette_Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 

@@ -19,6 +19,8 @@ import com.example.chefchatter.R;
 import com.example.chefchatter.modele.Avis;
 import com.example.chefchatter.modele.Compte;
 import com.example.chefchatter.presentateur.PresentateurAvis;
+import com.example.chefchatter.presentateur.PresentateurCompte;
+import com.example.chefchatter.presentateur.PresentateurIngredients;
 
 public class DescriptionRecette extends AppCompatActivity implements View.OnClickListener{
 
@@ -37,6 +39,9 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
     private RatingBar ratingBar;
     private Button btnEnvoyerAvis;
     private PresentateurAvis presentateurAvis;
+    private PresentateurCompte presentateurCompte;
+    private PresentateurIngredients presentateurIngredients;
+    private Compte compte;
 
 
 
@@ -46,6 +51,11 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_description_recette);
 
         presentateurAvis = new PresentateurAvis(this);
+        presentateurCompte = new PresentateurCompte(this);
+        presentateurIngredients = new PresentateurIngredients(this);
+
+        presentateurIngredients.obtenirIngredients(28);
+        presentateurIngredients.getIngredients();
 
         ratingBar = findViewById(R.id.ratingDesc);
         LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
@@ -111,6 +121,8 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
         }
         else if(v == btnEnvoyerAvis){
             Avis avis = new Avis();
+            compte = presentateurCompte.getCompte();
+            avis.setUserId(compte.getCourriel());
             presentateurAvis.CreationAvis(avis);
         }
 
