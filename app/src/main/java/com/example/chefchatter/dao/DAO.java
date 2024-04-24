@@ -51,9 +51,24 @@ public class DAO {
         return DAO.compte;
     }
 
+<<<<<<< HEAD
     public static String  ajouterFavoris (Favoris favoris) throws IOException, JSONException {
          return new HttpJsonService().requetteAjouterFavoris(favoris);
     }
+=======
+    public static List<Avis> getAvisSelonRecette(Integer idRecette) throws IOException, JSONException {
+        return new HttpJsonService().getCommentairesSelonRecette(idRecette);
+    }
+
+    public static Avis checkUserRatingExists(String email, Integer recetteId) throws IOException, JSONException {
+        return new HttpJsonService().checkRatingByUser(email, recetteId);
+    }
+
+    public static void modifAvis(Avis avis) throws IOException, JSONException {
+        new HttpJsonService().modifAvis(avis);
+    }
+
+>>>>>>> ef20dc8b0c78659aa1a9f8d070e3a7c61560d735
 
 
     public static String supprimerFavoris(Favoris favoris) throws IOException, JSONException {

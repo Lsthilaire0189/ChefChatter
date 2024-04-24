@@ -10,9 +10,31 @@ public class Modele {
 
     private List<Recette_Ingredient> ingredients = new ArrayList<>();
 
+    private List<Avis> avis = new ArrayList<>();
+
     public List<Recette> getRecettes() {
         return recettes;
     }
+
+    public List<Avis> getAvis() {
+        return avis;
+    }
+
+    public void setAvis(List<Avis> avis) {
+        this.avis = avis;
+    }
+
+    private Avis avisCourrant;
+
+    public Avis getAvisCourrant() {
+        return avisCourrant;
+    }
+
+    public void setAvisCourrant(Avis avisCourrant) {
+        this.avisCourrant = avisCourrant;
+    }
+
+
 
     public void setRecettes(List<Recette> recettes) {
         this.recettes = recettes;
