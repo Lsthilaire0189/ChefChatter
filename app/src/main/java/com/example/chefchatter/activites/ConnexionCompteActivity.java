@@ -80,6 +80,8 @@ public class ConnexionCompteActivity extends AppCompatActivity implements View.O
                 public void onReponseRecieved( CompteMessage reponse) {
                     if (reponse.getMessage().equals("Connexion réussie")) {
                         presentateurCompte.setCompte(reponse.getCompte());
+                        Intent intent = new Intent(ConnexionCompteActivity.this, ActionActivity.class);
+                        startActivity(intent);
                     }
                 }
             });
@@ -95,8 +97,7 @@ public class ConnexionCompteActivity extends AppCompatActivity implements View.O
 //                }
 //            });
 
-           Intent intent = new Intent(ConnexionCompteActivity.this, ActionActivity.class);
-            startActivity(intent);
+
 
         }
     }

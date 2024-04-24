@@ -38,11 +38,11 @@ public class ActionActivity extends AppCompatActivity implements View.OnClickLis
         btnParcourirRecettes.setOnClickListener(this);
         btnModifierCompte.setOnClickListener(this);
 
-        String nomUtilisateur = getIntent().getStringExtra("username");
+        PresentateurCompte presentateurCompte = new PresentateurCompte(this);
+        String nomUtilisateur =presentateurCompte.getCompte().getNomUtilisateur();
         String messaqeBienvenue = getResources().getString(R.string.bonjour, nomUtilisateur);
         tvBonjour.setText(messaqeBienvenue);
-        PresentateurCompte presentateurCompte = new PresentateurCompte(this);
-//        Intent intent2 = getIntent();
+        //        Intent intent2 = getIntent();
      //   Compte compte = (Compte) intent2.getSerializableExtra("compte");
     //    presentateurCompte.setCompte(compte);
 
