@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Avis {
 
-    @JsonProperty("id")
-    private int id;
     @JsonProperty("userId")
     private String userId;
     @JsonProperty("recetteId")
@@ -21,21 +19,13 @@ public class Avis {
         // Default constructor
     }
 
-    public Avis(int id, String userId, int recetteId, int rating, String commentaire, String username) {
-        this.id = id;
+    public Avis( String userId, int recetteId, int rating, String commentaire, String username) {
+
         this.userId = userId;
         this.recetteId = recetteId;
         this.rating = rating;
         this.commentaire = commentaire;
         this.username = username;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getUserId() {
