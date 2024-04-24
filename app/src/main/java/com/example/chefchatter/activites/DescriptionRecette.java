@@ -16,11 +16,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.chefchatter.R;
+import com.example.chefchatter.dao.IngredientsCallback;
 import com.example.chefchatter.modele.Avis;
 import com.example.chefchatter.modele.Compte;
+import com.example.chefchatter.modele.Recette_Ingredient;
+import com.example.chefchatter.presentateur.IngredientsAdapter;
 import com.example.chefchatter.presentateur.PresentateurAvis;
 import com.example.chefchatter.presentateur.PresentateurCompte;
 import com.example.chefchatter.presentateur.PresentateurIngredients;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DescriptionRecette extends AppCompatActivity implements View.OnClickListener{
 
@@ -42,6 +48,7 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
     private PresentateurCompte presentateurCompte;
     private PresentateurIngredients presentateurIngredients;
     private Compte compte;
+    List<Recette_Ingredient> ingredients = new ArrayList<>();
 
 
 
@@ -53,9 +60,6 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
         presentateurAvis = new PresentateurAvis(this);
         presentateurCompte = new PresentateurCompte(this);
         presentateurIngredients = new PresentateurIngredients(this);
-
-        presentateurIngredients.obtenirIngredients(28);
-        presentateurIngredients.getIngredients();
 
         ratingBar = findViewById(R.id.ratingDesc);
         LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
@@ -82,6 +86,7 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
         btnCompte.setOnClickListener(this);
 
         Intent intent = getIntent();
+        Integer idRecette = intent.getIntExtra("ID", 0);
         String srcRecette = intent.getStringExtra("SRC");
         String nomRecette = intent.getStringExtra("NOM");
         String tmpsCuisson = intent.getStringExtra("TEMPS_CUISSON");
@@ -104,6 +109,18 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
         txtNbPortions.setText(String.format("Nombre de portion(s): %s", nbPortions.toString()));
         txtDescPlat.setText(descPlat);
         listeEtapes.setText(etapes);
+
+        presentateurIngredients.obtenirIngredients(idRecette, new IngredientsCallback() {
+            @Override
+            public void onIngredientsReceived(List<Recette_Ingredient> ingredientsList) {
+                ingredients.clear();
+                ingredients.addAll(ingredientsList);
+                runOnUiThread(() -> {
+                    IngredientsAdapter adapteurIngredients = new IngredientsAdapter(DescriptionRecette.this, R.layout.layout_ingredients, presentateurIngredients);
+                    listeIngredients.setAdapter(adapteurIngredients);
+                });
+            }
+        });
     }
 
     @Override

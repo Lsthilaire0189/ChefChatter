@@ -3,6 +3,7 @@ package com.example.chefchatter.presentateur;
 import android.app.Activity;
 
 import com.example.chefchatter.dao.DAO;
+import com.example.chefchatter.dao.IngredientsCallback;
 import com.example.chefchatter.modele.Recette_Ingredient;
 import com.example.chefchatter.modele.Modele;
 import com.example.chefchatter.modele.ModeleManager;
@@ -27,7 +28,7 @@ public class PresentateurIngredients {
         return modele.getIngredients();
     }
 
-    public void obtenirIngredients(Integer idRecette) {
+    public void obtenirIngredients(Integer idRecette, IngredientsCallback callback) {
         new Thread(){
             @Override
             public void run() {
@@ -36,10 +37,20 @@ public class PresentateurIngredients {
                     List<Recette_Ingredient> liste = null;
                     liste = DAO.getIngredientsSelonRecette(idRecette);
                     modele.setIngredients(liste);
+                    callback.onIngredientsReceived(liste);
+
                 } catch (JSONException e) {
                 } catch (IOException e) {
                 }
             }
         }.start();
+    }
+
+    public int getNbIngredients() {
+        return modele.getIngredients().size();
+    }
+
+    public Recette_Ingredient getIngredient(int position) {
+        return modele.getIngredients().get(position);
     }
 }

@@ -59,4 +59,6 @@
     <string name="valutation_de_la_recette">Évalutation de la recette</string>
     <string name="commentaire">Commentaire:</string>
     <string name="listez_les_ingredients_s_par_s_par_des_virgules">Listez les ingredients, séparés par des virgules et sans espace</string>
+    <string name="ingredient">Ingredients:</string>
+    <string name="qt">Qt:</string>
 </resources>

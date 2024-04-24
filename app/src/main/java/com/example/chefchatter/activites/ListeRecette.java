@@ -92,6 +92,7 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
                 String src = recetteSelectionnee.getSrc();
                 String nom = recetteSelectionnee.getNom();
                 //ajouter mots clefs
+                Integer idRecette = recetteSelectionnee.getId();
                 String tempsCuisson = recetteSelectionnee.getCuisson();
                 String tempsPreparation = recetteSelectionnee.getPreparation();
                 String portions = recetteSelectionnee.getPortion();
@@ -100,6 +101,7 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
                 String regime = recetteSelectionnee.getRegime();
                 String type = recetteSelectionnee.getType();
                 String etape = recetteSelectionnee.getEtape();
+                iRecetteDescription.putExtra("ID", idRecette);
                 iRecetteDescription.putExtra("SRC", src);
                 iRecetteDescription.putExtra("NOM", nom);
                 iRecetteDescription.putExtra("TEMPS_CUISSON", tempsCuisson);
