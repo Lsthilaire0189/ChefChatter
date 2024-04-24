@@ -49,6 +49,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageButton
+                android:id="@+id/drBtnImgEtoile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/btn_star_big_on"
+                tools:layout_editor_absoluteX="339dp"
+                tools:layout_editor_absoluteY="126dp" />
+
             <ImageView
                 android:id="@+id/ivRecetteDesc"
                 android:layout_width="125dp"

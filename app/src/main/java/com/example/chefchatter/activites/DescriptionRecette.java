@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,10 +22,12 @@ import com.example.chefchatter.R;
 import com.example.chefchatter.dao.IngredientsCallback;
 import com.example.chefchatter.modele.Avis;
 import com.example.chefchatter.modele.Compte;
+import com.example.chefchatter.modele.Favoris;
 import com.example.chefchatter.modele.Recette_Ingredient;
 import com.example.chefchatter.presentateur.IngredientsAdapter;
 import com.example.chefchatter.presentateur.PresentateurAvis;
 import com.example.chefchatter.presentateur.PresentateurCompte;
+import com.example.chefchatter.presentateur.PresentateurFavoris;
 import com.example.chefchatter.presentateur.PresentateurIngredients;
 
 import java.util.ArrayList;
@@ -52,6 +56,9 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
     Integer idRecette;
     List<Recette_Ingredient> ingredients = new ArrayList<>();
     private EditText etCommentaire;
+    private ImageButton btnEtoile;
+    private PresentateurFavoris presentateurFavoris;
+    private Favoris favoris;
 
 
 
@@ -84,10 +91,12 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
         listeEtapes = findViewById(R.id.tvPrepaDesc);
         btnEnvoyerAvis = findViewById(R.id.btnEnvoyerDesc);
         etCommentaire = findViewById(R.id.editTextText);
+        btnEtoile = findViewById(R.id.drBtnImgEtoile);
 
         btnRetour.setOnClickListener(this);
         btnChefChatter.setOnClickListener(this);
         btnCompte.setOnClickListener(this);
+        btnEtoile.setOnClickListener(this);
 
         Intent intent = getIntent();
         idRecette = intent.getIntExtra("ID", 0);
@@ -114,6 +123,7 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
         txtDescPlat.setText(descPlat);
         listeEtapes.setText(etapes);
 
+        presentateurFavoris = new PresentateurFavoris(this);
         presentateurIngredients.obtenirIngredients(idRecette, new IngredientsCallback() {
             @Override
             public void onIngredientsReceived(List<Recette_Ingredient> ingredientsList) {
@@ -131,18 +141,15 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        if(v == btnRetour){
+        if (v == btnRetour) {
             finish();
-        }
-        else if(v == btnChefChatter){
+        } else if (v == btnChefChatter) {
             Intent intent = new Intent(this, ActionActivity.class);
             startActivity(intent);
-        }
-        else if(v == btnCompte){
+        } else if (v == btnCompte) {
             Intent intent = new Intent(this, Compte.class);
             startActivity(intent);
-        }
-        else if(v == btnEnvoyerAvis){
+        } else if (v == btnEnvoyerAvis) {
             Avis avis = new Avis();
             compte = presentateurCompte.getCompte();
             avis.setRecetteId(idRecette);
@@ -152,7 +159,13 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
             avis.setCommentaire(etCommentaire.getText().toString());
             avis.setUsername(compte.getNomUtilisateur());
             presentateurAvis.CreationAvis(avis);
+        } else if (v == btnEtoile) {
+            compte = presentateurCompte.getCompte();
+            favoris = new Favoris(compte.getCourriel(), idRecette);
+            presentateurFavoris.ajouterFavoris(favoris);
         }
-
+    }
+    public void  afficherMessage( String message){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
