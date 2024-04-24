@@ -1,5 +1,6 @@
 package com.example.chefchatter.dao;
 
+import com.example.chefchatter.modele.Avis;
 import com.example.chefchatter.modele.Compte;
 import com.example.chefchatter.modele.CompteMessage;
 import com.example.chefchatter.modele.Filtre;
@@ -59,18 +60,44 @@ public class HttpJsonService {
 
     }
 
-    public List<String> getIngredientsSelonRecette(Integer idRecette) throws IOException, JSONException {
+    public List<Recette_Ingredient> getIngredientsSelonRecette(Integer idRecette) throws IOException, JSONException {
         OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder().url(URL_POINT_ENTREE + "/recette/" + idRecette + "/ingredients").build();
+        Request request = new Request.Builder().url(URL_POINT_ENTREE + "/infosRecette/" + idRecette).get().build();
         Response response = okHttpClient.newCall(request).execute();
         String responseBody = response.body().string();
         if (isValidJSON(responseBody)) {
-            JSONArray jsonArray = new JSONArray(responseBody);
-            List<String> ingredients = new ArrayList<>();
-            for (int i = 0; i < jsonArray.length(); i++) {
-                ingredients.add(jsonArray.getString(i));
-            }
+            ObjectMapper objectMapper = new ObjectMapper();
+            List<Recette_Ingredient> ingredients = Arrays.asList(objectMapper.readValue(responseBody, Recette_Ingredient[].class));
             return ingredients;
+        } else {
+            return null;
+        }
+    }
+
+    public Avis ajouterAvis(Avis avis) throws IOException, JSONException {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("recetteId", avis.getRecetteId());
+            obj.put("email", avis.getUserId());
+            obj.put("rating", avis.getRating());
+            obj.put("commentaire", avis.getCommentaire());
+            obj.put("username", avis.getUsername());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        RequestBody corpsRequete = RequestBody.create(obj.toString(), JSON);
+        Request request = new Request.Builder()
+                .url(URL_POINT_ENTREE + "/ratings")
+                .post(corpsRequete)
+                .build();
+        Response response = okHttpClient.newCall(request).execute();
+        String responseBody = response.body().string();
+        if (isValidJSON(responseBody)) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            Avis avisRetourne = objectMapper.readValue(responseBody, Avis.class);
+            return avisRetourne;
         } else {
             return null;
         }

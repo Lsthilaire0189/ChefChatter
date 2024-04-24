@@ -29,7 +29,6 @@ public class PresentateurAvis {
                 try {
                     modele = ModeleManager.getInstance();
                     DAO.ajouterCommentaire(avis);
-
                 } catch (JSONException e) {
                 } catch (IOException e) {
                 }

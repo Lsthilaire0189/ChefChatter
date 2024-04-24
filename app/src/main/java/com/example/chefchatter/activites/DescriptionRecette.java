@@ -48,6 +48,7 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
     private PresentateurCompte presentateurCompte;
     private PresentateurIngredients presentateurIngredients;
     private Compte compte;
+    Integer idRecette;
     List<Recette_Ingredient> ingredients = new ArrayList<>();
 
 
@@ -86,7 +87,7 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
         btnCompte.setOnClickListener(this);
 
         Intent intent = getIntent();
-        Integer idRecette = intent.getIntExtra("ID", 0);
+        idRecette = intent.getIntExtra("ID", 0);
         String srcRecette = intent.getStringExtra("SRC");
         String nomRecette = intent.getStringExtra("NOM");
         String tmpsCuisson = intent.getStringExtra("TEMPS_CUISSON");
@@ -139,6 +140,7 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
         else if(v == btnEnvoyerAvis){
             Avis avis = new Avis();
             compte = presentateurCompte.getCompte();
+            avis.setRecetteId(idRecette);
             avis.setUserId(compte.getCourriel());
             presentateurAvis.CreationAvis(avis);
         }
