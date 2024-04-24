@@ -1,10 +1,8 @@
 package com.example.chefchatter.dao;
 
-import com.example.chefchatter.modele.Avis;
 import com.example.chefchatter.modele.Compte;
 import com.example.chefchatter.modele.CompteMessage;
 import com.example.chefchatter.modele.Filtre;
-import com.example.chefchatter.modele.Recette_Ingredient;
 import com.example.chefchatter.modele.Recette;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -15,6 +13,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -22,6 +21,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import com.example.chefchatter.modele.Recette_Ingredient;
+
 
 public class HttpJsonService {
 
@@ -33,12 +34,13 @@ public class HttpJsonService {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         JSONObject obj = new JSONObject();
         try {
-            JSONArray ingredientsArray = new JSONArray(Arrays.asList(filtre.getChoixIngredients()));
-
+            JSONArray j = new JSONArray();
+            j.put("");
             obj.put("origine", filtre.getChoixOrigine());
             obj.put("regime", filtre.getChoixRegime());
             obj.put("type", filtre.getChoixType());
-            obj.put("ingredients", ingredientsArray);
+            obj.put("ingredients", j);
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,14 +59,17 @@ public class HttpJsonService {
 
     }
 
-    public List<Recette_Ingredient> getIngredientsSelonRecette(Integer idRecette) throws IOException, JSONException {
+    public List<String> getIngredientsSelonRecette(Integer idRecette) throws IOException, JSONException {
         OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder().url(URL_POINT_ENTREE + "/infosRecette/" + idRecette).get().build();
+        Request request = new Request.Builder().url(URL_POINT_ENTREE + "/recette/" + idRecette + "/ingredients").build();
         Response response = okHttpClient.newCall(request).execute();
         String responseBody = response.body().string();
         if (isValidJSON(responseBody)) {
-            ObjectMapper objectMapper = new ObjectMapper();
-            List<Recette_Ingredient> ingredients = Arrays.asList(objectMapper.readValue(responseBody, Recette_Ingredient[].class));
+            JSONArray jsonArray = new JSONArray(responseBody);
+            List<String> ingredients = new ArrayList<>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                ingredients.add(jsonArray.getString(i));
+            }
             return ingredients;
         } else {
             return null;
@@ -87,7 +92,7 @@ public class HttpJsonService {
     public CompteMessage requeteCreationConnexion(Compte compte) {
         CompteMessage compteMessage = null;
         Compte compteRetourne = null;
-        String  username = "";
+        String username = "";
         String email = "";
         String prenom = "";
         String nom = "";
@@ -120,7 +125,7 @@ public class HttpJsonService {
                 jsonResponse = new JSONObject(responseBody);
                 String message = jsonResponse.getString("connexion");
                 reponseFinale = message;
-                if(reponseFinale.equals("Connexion reussie")) {
+                if (reponseFinale.equals("Connexion réussie")) {
                     username = jsonResponse.getString("username");
                     email = jsonResponse.getString("email");
                     prenom = jsonResponse.getString("prenom");
@@ -129,13 +134,12 @@ public class HttpJsonService {
                     mdp = jsonResponse.getString("password");
 
                 }
-                compteRetourne= new Compte(username,email,prenom,nom,dateNaissance,mdp);
-                compteMessage = new CompteMessage(reponseFinale,compteRetourne);
+                compteRetourne = new Compte(username, email, prenom, nom, dateNaissance, mdp);
+                compteMessage = new CompteMessage(reponseFinale, compteRetourne);
 
 
                 // Display the message in a Toast on the UI thread
                 //  String username = jsonResponse.getString("username");
-
 
 
                 // Display the message in a Toast on the UI thread
@@ -188,16 +192,7 @@ public class HttpJsonService {
                 String message = jsonResponse.getString("message");
 
                 reponseFinale = message;
-                compteMessage = new CompteMessage(reponseFinale,null);
-
-                // Display the message in a Toast on the UI thread
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//
+                compteMessage = new CompteMessage(reponseFinale, null);
 
             } else {
                 System.out.println("Request not successful. Response Code: " + response.code());
@@ -209,57 +204,74 @@ public class HttpJsonService {
         return compteMessage;
     }
 
-    public void requeteModificationCompte(Compte compte) {
+    public CompteMessage requeteModificationCompte(Compte compte) {
 
         final String URL_POINT_ENTREE = "https://equipe500.tch099.ovh/projet1/api";
+        CompteMessage compteMessage = null;
+        OkHttpClient okHttpClient = new OkHttpClient();
+        String responseBody;
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("docMail", compte.getCourriel());
+            obj.put("docUsername", compte.getNomUtilisateur());
+            obj.put("docPassword", compte.getMdp());
+            obj.put("docPrenom", compte.getPrenom());
+            obj.put("docNomFamille", compte.getNom());
+            obj.put("docDateNaissance", compte.getDateNaissance());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        RequestBody corpsRequete = RequestBody.create(String.valueOf(obj), JSON);
+        Request request = new Request.Builder().url(URL_POINT_ENTREE + "/pushModification").post(corpsRequete).build();
+        try {
+            Response response = okHttpClient.newCall(request).execute();
+            if (response.isSuccessful()) {
+                responseBody = response.body().string();
+                JSONObject jsonResponse = new JSONObject(responseBody);
+                String message = jsonResponse.getString("message");
+
+                compteMessage = new CompteMessage(message, null);
+
+            } else {
+                System.out.println("Request not successful. Response Code: " + response.code());
+                //  reponse = false;
+            }
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+        return compteMessage;
+    }
+
+    public CompteMessage requeteSuppressionCompte(Compte compte) {
+        CompteMessage compteMessage = null;
         OkHttpClient okHttpClient = new OkHttpClient();
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         JSONObject obj = new JSONObject();
         try {
             obj.put("email", compte.getCourriel());
-            obj.put("username", compte.getNomUtilisateur());
-            obj.put("password", compte.getMdp());
-            obj.put("prenom", compte.getPrenom());
-            obj.put("nom", compte.getNom());
-            obj.put("dateNaissance", compte.getDateNaissance());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        RequestBody corpsRequete = RequestBody.create(String.valueOf(obj), JSON);
-        Request request = new Request.Builder().url(URL_POINT_ENTREE + "/modifierCompte/"+ compte.getCourriel()).put(corpsRequete).build();
-    }
 
-    public void ajoutAvis(Avis avis){
-        final String URL_POINT_ENTREE = "https://equipe500.tch099.ovh/projet1/api";
-        OkHttpClient okHttpClient = new OkHttpClient();
-        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        JSONObject obj = new JSONObject();
-        try {
-            obj.put("userId", avis.getUserId());
-            obj.put("recetteId", avis.getRecetteId());
-            obj.put("rating", avis.getRating());
-            obj.put("commentaire", avis.getCommentaire());
-            obj.put("username", avis.getUsername());
         } catch (Exception e) {
             e.printStackTrace();
         }
         RequestBody corpsRequete = RequestBody.create(String.valueOf(obj), JSON);
-        Request request = new Request.Builder().url(URL_POINT_ENTREE + "/ratings").post(corpsRequete).build();
+        Request request = new Request.Builder().url(URL_POINT_ENTREE + "/deleteAccountAndroid").post(corpsRequete).build();
         try {
             Response response = okHttpClient.newCall(request).execute();
             if (response.isSuccessful()) {
                 String responseBody = response.body().string();
                 JSONObject jsonResponse = new JSONObject(responseBody);
                 String message = jsonResponse.getString("message");
+
+                compteMessage = new CompteMessage(message, null);
+
             } else {
                 System.out.println("Request not successful. Response Code: " + response.code());
             }
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    public void requeteSuppressionCompte(Compte compte) {
+        return compteMessage;
     }
 }
-
