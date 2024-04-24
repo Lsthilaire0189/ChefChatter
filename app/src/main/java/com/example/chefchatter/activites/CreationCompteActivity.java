@@ -9,8 +9,12 @@ import java.util.Calendar;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.chefchatter.dao.CompteCallBack;
+import com.example.chefchatter.dao.DAO;
 import com.example.chefchatter.modele.Compte;
 import com.example.chefchatter.R;
+import com.example.chefchatter.modele.CompteMessage;
+import com.example.chefchatter.presentateur.PresentateurCompte;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONException;
@@ -24,7 +28,7 @@ import okhttp3.Response;
 
 import java.io.IOException;
 
-public class MainActivity3 extends AppCompatActivity implements View.OnClickListener{
+public class CreationCompteActivity extends AppCompatActivity implements View.OnClickListener{
     private Button btnSelectDate;
     private Button btnRetour;
 
@@ -37,7 +41,8 @@ public class MainActivity3 extends AppCompatActivity implements View.OnClickList
     private TextInputEditText mdp;
 
     private String dateNaissance;
-
+    Compte compte;
+    PresentateurCompte presentateurCompte;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +61,8 @@ public class MainActivity3 extends AppCompatActivity implements View.OnClickList
         nomUtilisateur = findViewById(R.id.inputNomUtilisateurMain3);
         mdp = findViewById(R.id.inputMdpMain3);
 
+        presentateurCompte = new PresentateurCompte(this);
+
         btnSelectDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,7 +71,7 @@ public class MainActivity3 extends AppCompatActivity implements View.OnClickList
                 int month = calendar.get(Calendar.MONTH);
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity3.this,
+                DatePickerDialog datePickerDialog = new DatePickerDialog(CreationCompteActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker datePicker, int selectedYear, int selectedMonth, int selectedDay) {
@@ -85,11 +92,16 @@ public class MainActivity3 extends AppCompatActivity implements View.OnClickList
         if (v == btnRetour) {
             finish();
         } else if (v == btnConfirmer) {
-            (new Thread() {
-                public void run() {
-                    requeteCreationCompte();
+             compte = new Compte(prenom.getText().toString(), nom.getText().toString(), courriel.getText().toString(), nomUtilisateur.getText().toString(), dateNaissance, mdp.getText().toString());
+             presentateurCompte.creationCompte(compte, new CompteCallBack() {
+                @Override
+                public void onReponseRecieved(CompteMessage reponse) {
+                    if(reponse.getMessage().equals("Compte crée avec succès")) {
+                        finish();
+                    }
                 }
-            }).start();
+            });
+
 
         }
     }
@@ -101,6 +113,7 @@ public class MainActivity3 extends AppCompatActivity implements View.OnClickList
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         JSONObject obj = new JSONObject();
         Compte compte = new Compte(prenom.getText().toString(), nom.getText().toString(), courriel.getText().toString(), nomUtilisateur.getText().toString(), dateNaissance, mdp.getText().toString());
+        DAO.setCompte(compte);
         try {
             obj.put("email", compte.getCourriel());
             obj.put("username", compte.getNomUtilisateur());
@@ -138,6 +151,9 @@ public class MainActivity3 extends AppCompatActivity implements View.OnClickList
             e.printStackTrace();
         }
 
+    }
+    public void afficherMessage(CompteMessage compteMessage) {
+        Toast.makeText(this,compteMessage.getMessage(),Toast.LENGTH_SHORT).show();
     }
 
 }

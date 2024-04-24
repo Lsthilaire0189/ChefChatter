@@ -3,7 +3,7 @@ package com.example.chefchatter.activites;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CalendarView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,22 +11,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.chefchatter.R;
 import com.example.chefchatter.modele.Compte;
 import com.example.chefchatter.presentateur.PresentateurCompte;
-import com.example.chefchatter.presentateur.PresentateurRecette;
 
 public class ModifierCompteActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private CalendarView calendarView;
+    private DatePicker datePicker;
     private EditText courriel;
     private EditText nomUtilisateur;
     private EditText mdp;
     private EditText prenom;
     private EditText nom;
     private Button btnRetour;
+    private Button btnModifier;
+    private Button btnSupprimer;
     private PresentateurCompte presentateurCompte;
-    Compte compteModifie;
+    private Compte compteModifie;
+    private Compte compteInitial;
 
 
-protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modifier_compte);
 
@@ -35,23 +37,43 @@ protected void onCreate(Bundle savedInstanceState) {
         mdp = findViewById(R.id.mcPtpassword);
         prenom = findViewById(R.id.mcPtPrenom);
         nom = findViewById(R.id.mcPtNomFamille);
+        datePicker = findViewById(R.id.mcDateNaissance);
+
         btnRetour = findViewById(R.id.mcBtnRetour);
-        calendarView = findViewById(R.id.mcDateNaissance);
+        btnModifier = findViewById(R.id.mcBtnModifier);
+        btnSupprimer = findViewById(R.id.mcBtnSupprimer);
 
         btnRetour.setOnClickListener(this);
-        compteModifie = new Compte(prenom.getText().toString(), nom.getText().toString(),  courriel.getText().toString(), nomUtilisateur.getText().toString(),String.valueOf(calendarView.getDate()) ,mdp.getText().toString());
+        btnModifier.setOnClickListener(this);
+        btnSupprimer.setOnClickListener(this);
 
         presentateurCompte = new PresentateurCompte(this);
+        compteInitial = presentateurCompte.getCompte();
+
+        courriel.setText(compteInitial.getCourriel());
+        nomUtilisateur.setText(compteInitial.getNomUtilisateur());
+        mdp.setText(compteInitial.getMdp());
+        prenom.setText(compteInitial.getPrenom());
+        nom.setText(compteInitial.getNom());
+        String[] date = compteInitial.getDateNaissance().split("/");
+        datePicker.updateDate(Integer.parseInt(date[2]), Integer.parseInt(date[1]) - 1, Integer.parseInt(date[0]));
 
 
-        }
 
-@Override
-public void onClick(View v) {
-        if(v.getId() == R.id.mcBtnRetour){
-            presentateurCompte.modifierCompte(compteModifie);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.mcBtnRetour) {
             finish();
-        }
+        } else if (v.getId() == R.id.mcBtnModifier) {
+            String date = datePicker.getDayOfMonth() + "/" + (datePicker.getMonth() + 1) + "/" + datePicker.getYear();
+         //   compteModifie =
+             //       presentateurCompte.modifierCompte(compteModifie);
+        } else if (v.getId() == R.id.mcBtnSupprimer) {
+            presentateurCompte.supprimerCompte(compteModifie);
 
         }
-        }
+
+    }
+}

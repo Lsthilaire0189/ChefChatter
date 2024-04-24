@@ -22,13 +22,13 @@
             android:name=".activites.ListeRecette"
             android:exported="false" />
         <activity
-            android:name=".activites.AffichageRecette"
+            android:name=".activites.AffichageRecetteActivity"
             android:exported="false" />
         <activity
-            android:name=".activites.MainActivity3"
+            android:name=".activites.CreationCompteActivity"
             android:exported="false" />
         <activity
-            android:name=".activites.MainActivity2"
+            android:name=".activites.ConnexionCompteActivity"
             android:exported="false" />
         <activity android:name=".activites.ActionActivity"
             android:exported="false" />

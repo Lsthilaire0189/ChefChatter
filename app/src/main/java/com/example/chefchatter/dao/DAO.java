@@ -2,16 +2,18 @@ package com.example.chefchatter.dao;
 
 import com.example.chefchatter.modele.Avis;
 import com.example.chefchatter.modele.Compte;
+import com.example.chefchatter.modele.CompteMessage;
 import com.example.chefchatter.modele.Filtre;
 import com.example.chefchatter.modele.Recette;
 
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 public class DAO {
-
+static Compte compte ;
     public static List<Recette> getRecettes(Filtre filtre) throws IOException, JSONException {
         return new HttpJsonService().RequeteFiltre(filtre);
     }
@@ -20,11 +22,11 @@ public class DAO {
         return new HttpJsonService().getIngredientsSelonRecette(idRecette);
 
     }
-    public static void creationCompte (Compte compte) throws IOException, JSONException {
-        new HttpJsonService().requeteCreationCompte(compte);
+    public static CompteMessage creationCompte (Compte compte) throws IOException, JSONException {
+        return new HttpJsonService().requeteCreationCompte(compte);
     }
-    public static void connexionCompte (Compte compte) throws IOException, JSONException {
-        new HttpJsonService().requeteCreationConnexion(compte);
+    public static CompteMessage connexionCompte (Compte compte) throws IOException, JSONException {
+        return new  HttpJsonService().requeteCreationConnexion(compte);
     }
     public static void modifierCompte (Compte compte) throws IOException, JSONException {
         new HttpJsonService().requeteModificationCompte(compte);
@@ -32,5 +34,14 @@ public class DAO {
 
     public static void ajouterCommentaire (Avis avis) throws IOException, JSONException {
         new HttpJsonService().ajoutAvis(avis);
+    }
+    public static void supprimerCompte (Compte compte) throws IOException, JSONException {
+        new HttpJsonService().requeteSuppressionCompte(compte);
+    }
+    public static void setCompte (Compte compte) {
+       DAO.compte = compte;
+    }
+    public  static Compte  getCompte (Compte compte)  {
+       return DAO.compte;
     }
 }

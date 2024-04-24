@@ -18,8 +18,18 @@ public class Modele {
         this.recettes = recettes;
     }
 
+    Compte compteCourrant ;
+
+
     public List<String> getIngredients() {
         return ingredients;
+    }
+
+    public Compte getCompteCourrant() {
+        return compteCourrant;
+    }
+    public void setCompteCourrant(Compte compteCourrant) {
+        this.compteCourrant = compteCourrant;
     }
 
     public void setIngredients(List<String> ingredients) {
