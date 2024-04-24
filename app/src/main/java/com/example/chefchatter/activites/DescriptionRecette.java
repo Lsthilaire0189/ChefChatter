@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.chefchatter.R;
 import com.example.chefchatter.dao.AvisCallback;
+import com.example.chefchatter.dao.AvisCourrantCallback;
 import com.example.chefchatter.dao.IngredientsCallback;
 import com.example.chefchatter.modele.Avis;
 import com.example.chefchatter.modele.Compte;
@@ -31,7 +32,7 @@ import com.example.chefchatter.presentateur.PresentateurIngredients;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DescriptionRecette extends AppCompatActivity implements View.OnClickListener{
+public class DescriptionRecette extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnRetour;
     private Button btnChefChatter;
@@ -56,7 +57,7 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
     private EditText etCommentaire;
     List<Avis> listeCommentaires = new ArrayList<>();
     ListView lvCommentaires;
-
+    boolean isAvisCourrant = false;
 
 
     @Override
@@ -70,13 +71,11 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
 
         ratingBar = findViewById(R.id.ratingDesc);
         LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
-        for(int i = 0; i < stars.getNumberOfLayers(); i++){
+        for (int i = 0; i < stars.getNumberOfLayers(); i++) {
             stars.getDrawable(i).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
         }
 
         btnRetour = findViewById(R.id.btnRetourDesc);
-        btnChefChatter = findViewById(R.id.btnChefChatterDesc);
-        btnCompte = findViewById(R.id.btnCompteDesc);
         imgRecette = findViewById(R.id.ivRecetteDesc);
         txtMotsClefs = findViewById(R.id.tvMotsClefsDesc);
         txtNomRecette = findViewById(R.id.tvNomRecetteDesc);
@@ -91,8 +90,6 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
         lvCommentaires = findViewById(R.id.lvCommentaires);
 
         btnRetour.setOnClickListener(this);
-        btnChefChatter.setOnClickListener(this);
-        btnCompte.setOnClickListener(this);
 
         Intent intent = getIntent();
         idRecette = intent.getIntExtra("ID", 0);
@@ -143,33 +140,46 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
             }
         });
 
+        presentateurAvis.obtenirAvisCourrant(presentateurCompte.getCompte().getCourriel(), idRecette, new AvisCourrantCallback() {
+            @Override
+            public void onAvisCourrantReceived(Avis avis) {
+                runOnUiThread(() -> {
+                    if (avis != null) {
+                        etCommentaire.setText(avis.getCommentaire());
+                        ratingBar.setRating(avis.getRating());
+                        btnEnvoyerAvis.setText("Modifier l'avis");
+                        isAvisCourrant = true;
+                    }
+                });
+            }
+        });
+
         btnEnvoyerAvis.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if(v == btnRetour){
+        if (v == btnRetour) {
             finish();
-        }
-        else if(v == btnChefChatter){
-            Intent intent = new Intent(this, ActionActivity.class);
-            startActivity(intent);
-        }
-        else if(v == btnCompte){
-            Intent intent = new Intent(this, Compte.class);
-            startActivity(intent);
-        }
-        else if(v == btnEnvoyerAvis){
-            Avis avis = new Avis();
-            compte = presentateurCompte.getCompte();
-            avis.setRecetteId(idRecette);
-            avis.setUserId(compte.getCourriel());
-            int rating = Math.round(ratingBar.getRating());
-            avis.setRating(rating);
-            avis.setCommentaire(etCommentaire.getText().toString());
-            avis.setUsername(compte.getNomUtilisateur());
-            presentateurAvis.CreationAvis(avis);
-        }
+        } else if (v == btnEnvoyerAvis) {
+            if (isAvisCourrant) {
+                Avis avis = presentateurAvis.getAvisCourrant();
+                int rating = Math.round(ratingBar.getRating());
+                avis.setRating(rating);
+                avis.setCommentaire(etCommentaire.getText().toString());
+                presentateurAvis.modifAvis(avis);
+            } else {
+                Avis avis = new Avis();
+                compte = presentateurCompte.getCompte();
+                avis.setRecetteId(idRecette);
+                avis.setUserId(compte.getCourriel());
+                int rating = Math.round(ratingBar.getRating());
+                avis.setRating(rating);
+                avis.setCommentaire(etCommentaire.getText().toString());
+                avis.setUsername(compte.getNomUtilisateur());
+                presentateurAvis.CreationAvis(avis);
+            }
 
+        }
     }
 }

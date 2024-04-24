@@ -111,7 +111,7 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
                 iRecetteDescription.putExtra("ORIGINE", origine);
                 iRecetteDescription.putExtra("REGIME", regime);
                 iRecetteDescription.putExtra("TYPE", type);
-                iRecetteDescription.putExtra("ETAPE", etape);
+                iRecetteDescription.putExtra("ETAPES", etape);
                 startActivity(iRecetteDescription);
 
             }

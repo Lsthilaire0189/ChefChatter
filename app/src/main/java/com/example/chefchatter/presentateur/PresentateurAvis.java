@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.example.chefchatter.activites.ListeRecette;
 import com.example.chefchatter.dao.AvisCallback;
+import com.example.chefchatter.dao.AvisCourrantCallback;
 import com.example.chefchatter.dao.DAO;
 import com.example.chefchatter.modele.Avis;
 import com.example.chefchatter.modele.Compte;
@@ -57,12 +58,47 @@ public class PresentateurAvis {
         }.start();
     }
 
+    public void obtenirAvisCourrant(String email, Integer recetteId, AvisCourrantCallback callback) {
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    modele = ModeleManager.getInstance();
+                    Avis avis = null;
+                    avis = DAO.checkUserRatingExists(email, recetteId);
+                    modele.setAvisCourrant(avis);
+                    callback.onAvisCourrantReceived(avis);
+
+                } catch (JSONException e) {
+                } catch (IOException e) {
+                }
+            }
+        }.start();
+    }
+
+    public void modifAvis(Avis avis) {
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    DAO.modifAvis(avis);
+                } catch (JSONException e) {
+                } catch (IOException e) {
+                }
+            }
+        }.start();
+    }
+
     public int getNbAvis() {
         return modele.getAvis().size();
     }
 
     public Avis getAvis(int position) {
         return modele.getAvis().get(position);
+    }
+
+    public Avis getAvisCourrant() {
+        return modele.getAvisCourrant();
     }
 
 

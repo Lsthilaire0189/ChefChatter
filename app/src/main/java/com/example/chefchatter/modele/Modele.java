@@ -22,6 +22,16 @@ public class Modele {
         this.avis = avis;
     }
 
+    private Avis avisCourrant;
+
+    public Avis getAvisCourrant() {
+        return avisCourrant;
+    }
+
+    public void setAvisCourrant(Avis avisCourrant) {
+        this.avisCourrant = avisCourrant;
+    }
+
 
 
     public void setRecettes(List<Recette> recettes) {

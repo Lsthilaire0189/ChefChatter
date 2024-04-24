@@ -29,26 +29,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/btnCompteDesc"
-                android:layout_width="104dp"
-                android:layout_height="57dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/mon_compte"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/btnChefChatterDesc"
-                android:layout_width="150dp"
-                android:layout_height="57dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/chefchatter"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <ImageView
                 android:id="@+id/ivRecetteDesc"
                 android:layout_width="125dp"
@@ -186,7 +166,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
                 android:layout_width="400dp"
-                android:layout_height="63dp"
+                android:layout_height="300dp"
                 android:layout_marginTop="650dp"
                 android:background="#003D7E"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -207,14 +187,17 @@
                 <TextView
                     android:id="@+id/tvPrepaDesc"
                     android:layout_width="wrap_content"
-                    android:layout_height="27dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="32dp"
                     android:gravity="center"
+                    android:scrollbars="vertical"
                     android:text="@string/textview"
                     android:textColor="#FFFFFF"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
@@ -323,7 +306,7 @@
 
         <LinearLayout
             android:layout_width="393dp"
-            android:layout_height="313dp"
+            android:layout_height="581dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:background="#027396"

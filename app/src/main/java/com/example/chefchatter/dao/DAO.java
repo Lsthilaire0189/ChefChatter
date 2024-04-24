@@ -54,6 +54,14 @@ public class DAO {
         return new HttpJsonService().getCommentairesSelonRecette(idRecette);
     }
 
+    public static Avis checkUserRatingExists(String email, Integer recetteId) throws IOException, JSONException {
+        return new HttpJsonService().checkRatingByUser(email, recetteId);
+    }
+
+    public static void modifAvis(Avis avis) throws IOException, JSONException {
+        new HttpJsonService().modifAvis(avis);
+    }
+
 
 }
 

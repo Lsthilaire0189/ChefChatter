@@ -28,12 +28,10 @@ public class ActionActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_action);
 
         tvBonjour = findViewById(R.id.tvBonjour);
-        imgBtnHome = findViewById(R.id.ibHome);
         btnDeconnexion = findViewById(R.id.btnDeconnexion);
         btnParcourirRecettes = findViewById(R.id.btnParcourirRecettes);
         btnModifierCompte = findViewById(R.id.btnModifierCompte);
 
-        imgBtnHome.setOnClickListener(this);
         btnDeconnexion.setOnClickListener(this);
         btnParcourirRecettes.setOnClickListener(this);
         btnModifierCompte.setOnClickListener(this);
@@ -51,10 +49,7 @@ public class ActionActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.ibHome){
-            finish();
-        }
-        else if(v.getId() == R.id.btnDeconnexion){
+        if(v.getId() == R.id.btnDeconnexion){
             finish();
         }
         else if(v.getId() == R.id.btnParcourirRecettes){

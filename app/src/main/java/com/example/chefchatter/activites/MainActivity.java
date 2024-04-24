@@ -13,7 +13,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Button boutonCreationCompte;
     Button boutonConnexion;
-    Button boutonAfficherRecette;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +20,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         boutonCreationCompte=findViewById(R.id.btnConnexionMain);
         boutonConnexion=findViewById(R.id.btnCreerCompteMain);
-        boutonAfficherRecette=findViewById(R.id.btnParcourtRecetteMain);
         boutonCreationCompte.setOnClickListener(this);
         boutonConnexion.setOnClickListener(this);
-        boutonAfficherRecette.setOnClickListener(this);
 
 
     }
@@ -38,11 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(view==boutonConnexion)
         {
             Intent intent=new Intent(this, CreationCompteActivity.class);
-            startActivity(intent);
-        }
-        if(view==boutonAfficherRecette)
-        {
-            Intent intent= new Intent(this, AffichageRecetteActivity.class);
             startActivity(intent);
         }
     }

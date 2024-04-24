@@ -9,19 +9,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/textview" />
+        android:text="@string/textview"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/tvNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/textview" />
+        android:text="@string/textview"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/tvCommentaire"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/textview" />
+        android:text="@string/textview"
+        android:textColor="#FFFFFF" />
 </LinearLayout>

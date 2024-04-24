@@ -51,9 +51,9 @@ public class AdapterAvis extends ArrayAdapter<Avis> {
             final TextView tvCommentaire = view.findViewById(R.id.tvCommentaire);
             final TextView tvNote = view.findViewById(R.id.tvNote);
 
-            tvUsername.setText(String.format("Username: " + avis.getUsername()));
-            tvCommentaire.setText(String.format("Commentaire:" + avis.getCommentaire()));
-            tvNote.setText(String.format("Note" + avis.getRating() + "/5"));
+            tvUsername.setText(String.format("Username:  " + avis.getUsername()));
+            tvCommentaire.setText(String.format("Commentaire:  " + avis.getCommentaire()));
+            tvNote.setText(String.format("Note:  " + avis.getRating() + "/5"));
         }
         return view;
     }

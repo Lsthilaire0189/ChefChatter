@@ -55,9 +55,6 @@ public class ConnexionCompteActivity extends AppCompatActivity implements View.O
         creationCompte = findViewById(R.id.btnPasCompteMain2);
         creationCompte.setOnClickListener(this);
 
-        mdpOublie = findViewById(R.id.btnMdpOublieMain2);
-        mdpOublie.setOnClickListener(this);
-
         btnConnexion = findViewById(R.id.btnSeConnecterMain2);
         btnConnexion.setOnClickListener(this);
 
@@ -70,8 +67,6 @@ public class ConnexionCompteActivity extends AppCompatActivity implements View.O
             finish();
         } else if (v == creationCompte) {
             startActivity(new Intent(ConnexionCompteActivity.this, CreationCompteActivity.class));
-        } else if (v == mdpOublie) {
-            startActivity(new Intent(ConnexionCompteActivity.this, MdpOublie.class));
         } else if (v == btnConnexion) {
             compte = new Compte("", "", courriel.getText().toString(), "", "", mdp.getText().toString());
 
