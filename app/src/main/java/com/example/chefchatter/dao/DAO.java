@@ -50,6 +50,10 @@ public class DAO {
         return DAO.compte;
     }
 
+    public static List<Avis> getAvisSelonRecette(Integer idRecette) throws IOException, JSONException {
+        return new HttpJsonService().getCommentairesSelonRecette(idRecette);
+    }
+
 
 }
 

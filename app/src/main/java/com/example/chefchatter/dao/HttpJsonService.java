@@ -60,6 +60,25 @@ public class HttpJsonService {
 
     }
 
+    public List<Avis> getCommentairesSelonRecette(int recetteId) throws IOException, JSONException {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(URL_POINT_ENTREE + "/ratings/" + recetteId)
+                .get()
+                .build();
+
+        Response response = okHttpClient.newCall(request).execute();
+        String responseBody = response.body().string();
+
+        if (isValidJSON(responseBody)) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            List<Avis> commentaires = Arrays.asList(objectMapper.readValue(responseBody, Avis[].class));
+            return commentaires;
+        } else {
+            return null;
+        }
+    }
+
     public List<Recette_Ingredient> getIngredientsSelonRecette(Integer idRecette) throws IOException, JSONException {
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder().url(URL_POINT_ENTREE + "/infosRecette/" + idRecette).get().build();

@@ -17,10 +17,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.chefchatter.R;
+import com.example.chefchatter.dao.AvisCallback;
 import com.example.chefchatter.dao.IngredientsCallback;
 import com.example.chefchatter.modele.Avis;
 import com.example.chefchatter.modele.Compte;
 import com.example.chefchatter.modele.Recette_Ingredient;
+import com.example.chefchatter.presentateur.AdapterAvis;
 import com.example.chefchatter.presentateur.IngredientsAdapter;
 import com.example.chefchatter.presentateur.PresentateurAvis;
 import com.example.chefchatter.presentateur.PresentateurCompte;
@@ -52,6 +54,8 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
     Integer idRecette;
     List<Recette_Ingredient> ingredients = new ArrayList<>();
     private EditText etCommentaire;
+    List<Avis> listeCommentaires = new ArrayList<>();
+    ListView lvCommentaires;
 
 
 
@@ -84,6 +88,7 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
         listeEtapes = findViewById(R.id.tvPrepaDesc);
         btnEnvoyerAvis = findViewById(R.id.btnEnvoyerDesc);
         etCommentaire = findViewById(R.id.editTextText);
+        lvCommentaires = findViewById(R.id.lvCommentaires);
 
         btnRetour.setOnClickListener(this);
         btnChefChatter.setOnClickListener(this);
@@ -122,6 +127,18 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
                 runOnUiThread(() -> {
                     IngredientsAdapter adapteurIngredients = new IngredientsAdapter(DescriptionRecette.this, R.layout.layout_ingredients, presentateurIngredients);
                     listeIngredients.setAdapter(adapteurIngredients);
+                });
+            }
+        });
+
+        presentateurAvis.obtenirAvis(idRecette, new AvisCallback() {
+            @Override
+            public void onAvisReceived(List<Avis> avis) {
+                listeCommentaires.clear();
+                listeCommentaires.addAll(avis);
+                runOnUiThread(() -> {
+                    AdapterAvis adapteurAvis = new AdapterAvis(DescriptionRecette.this, R.layout.layout_commentaire, presentateurAvis);
+                    lvCommentaires.setAdapter(adapteurAvis);
                 });
             }
         });

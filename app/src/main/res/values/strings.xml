@@ -61,4 +61,7 @@
     <string name="listez_les_ingredients_s_par_s_par_des_virgules">Listez les ingredients, séparés par des virgules et sans espace</string>
     <string name="ingredient">Ingredients:</string>
     <string name="qt">Qt:</string>
+    <string name="envoyer">Envoyer</string>
+    <string name="veuillez_laissez_votre_commentaire">Veuillez laissez votre commentaire</string>
+    <string name="avis_d_autres_utilisteurs">Avis d\'autres utilisteurs:</string>
 </resources>

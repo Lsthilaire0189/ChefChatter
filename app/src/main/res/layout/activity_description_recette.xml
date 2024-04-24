@@ -120,7 +120,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ConstraintLayout"
                 android:layout_width="400dp"
-                android:layout_height="80dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="420dp"
                 android:background="#003D7E"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -154,7 +154,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="400dp"
                 android:layout_height="99dp"
-                android:layout_marginTop="525dp"
+                android:layout_marginTop="540dp"
                 android:background="#003D7E"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.494"
@@ -246,7 +246,7 @@
 
         <LinearLayout
             android:layout_width="393dp"
-            android:layout_height="221dp"
+            android:layout_height="240dp"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:background="#003D7E"
@@ -272,7 +272,7 @@
                     android:id="@+id/textView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
+                    android:layout_marginStart="10dp"
                     android:text="@string/commentaire"
                     android:textColor="#FFFFFF" />
 
@@ -285,7 +285,7 @@
                     android:layout_weight="1"
                     android:background="#FFFFFF"
                     android:ems="10"
-                    android:hint="Veuillez laissez votre commentaire"
+                    android:hint="@string/veuillez_laissez_votre_commentaire"
                     android:inputType="text"
                     android:minHeight="48dp"
                     android:textColor="#000000"
@@ -311,14 +311,39 @@
             <Button
                 android:id="@+id/btnEnvoyerDesc"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="62dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="#027396"
                 android:gravity="center"
-                android:text="Envoyer"
+                android:text="@string/envoyer"
                 android:textSize="12sp" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="393dp"
+            android:layout_height="313dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="#027396"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="@string/avis_d_autres_utilisteurs"
+                android:textColor="#FFFFFF" />
+
+            <ListView
+                android:id="@+id/lvCommentaires"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1" />
         </LinearLayout>
 
     </LinearLayout>

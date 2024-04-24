@@ -8,9 +8,21 @@ public class Modele {
 
     private List<Recette_Ingredient> ingredients = new ArrayList<>();
 
+    private List<Avis> avis = new ArrayList<>();
+
     public List<Recette> getRecettes() {
         return recettes;
     }
+
+    public List<Avis> getAvis() {
+        return avis;
+    }
+
+    public void setAvis(List<Avis> avis) {
+        this.avis = avis;
+    }
+
+
 
     public void setRecettes(List<Recette> recettes) {
         this.recettes = recettes;
