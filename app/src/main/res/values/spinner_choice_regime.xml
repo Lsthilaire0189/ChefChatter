@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="spinner_choice_regime_values">
+        <item>""</item>
+        <item>vegetarien</item>
+        <item>sansGluten</item>
+        <item>proteines</item>
+        <item>vegan</item>
+    </string-array>
     <string-array name="spinner_choice_regime">
-        <item>Veuillez sélectionner un type de régime</item>
+        <item>Veuillez sélectionner un régime</item>
         <item>Végétarien</item>
         <item>Sans Gluten</item>
         <item>Protéiné</item>

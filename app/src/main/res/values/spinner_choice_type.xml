@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="spinner_choice_type_values">
+        <item>""</item>
+        <item>patisserie</item>
+        <item>salade</item>
+        <item>pate</item>
+        <item>bbq</item>
+        <item>dessert</item>
+        <item>fumoir</item>
+        <item>fruitDeMer</item>
+        <item>soupe</item>
+    </string-array>
     <string-array name="spinner_choice_type">
         <item>Veuillez sélectionner le type de recette</item>
         <item>Pâtisserie</item>

@@ -1,5 +1,6 @@
 package com.example.chefchatter.dao;
 
+import com.example.chefchatter.modele.Avis;
 import com.example.chefchatter.modele.Compte;
 import com.example.chefchatter.modele.Filtre;
 import com.example.chefchatter.modele.Recette;
@@ -30,13 +31,12 @@ public class HttpJsonService {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         JSONObject obj = new JSONObject();
         try {
-            JSONArray j= new JSONArray();
-            j.put("");
+            JSONArray ingredientsArray = new JSONArray(Arrays.asList(filtre.getChoixIngredients()));
+
             obj.put("origine", filtre.getChoixOrigine());
             obj.put("regime", filtre.getChoixRegime());
             obj.put("type", filtre.getChoixType());
-            obj.put("ingredients",j);
-
+            obj.put("ingredients", ingredientsArray);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -199,5 +199,35 @@ public class HttpJsonService {
               }
         RequestBody corpsRequete = RequestBody.create(String.valueOf(obj), JSON);
         Request request = new Request.Builder().url(URL_POINT_ENTREE + "/modifierCompte/"+ compte.getCourriel()).put(corpsRequete).build();
-}
+    }
+
+    public void ajoutAvis(Avis avis){
+        final String URL_POINT_ENTREE = "https://equipe500.tch099.ovh/projet1/api";
+        OkHttpClient okHttpClient = new OkHttpClient();
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("userId", avis.getUserId());
+            obj.put("recetteId", avis.getRecetteId());
+            obj.put("rating", avis.getRating());
+            obj.put("commentaire", avis.getCommentaire());
+            obj.put("username", avis.getUsername());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        RequestBody corpsRequete = RequestBody.create(String.valueOf(obj), JSON);
+        Request request = new Request.Builder().url(URL_POINT_ENTREE + "/ratings").post(corpsRequete).build();
+        try {
+            Response response = okHttpClient.newCall(request).execute();
+            if (response.isSuccessful()) {
+                String responseBody = response.body().string();
+                JSONObject jsonResponse = new JSONObject(responseBody);
+                String message = jsonResponse.getString("message");
+            } else {
+                System.out.println("Request not successful. Response Code: " + response.code());
+            }
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+    }
 }

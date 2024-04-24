@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
     PresentateurRecette presentateurRecette;
     List<Recette> recettes;
     private AdapteurRecette adaptateur;
+    private EditText txtIngredient;
 
 
     @Override
@@ -80,6 +82,8 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
                 R.layout.layout_recettes,presentateurRecette);
         listeRecette.setAdapter(adaptateur);
 
+        txtIngredient = findViewById(R.id.etListeIngredients);
+
         listeRecette.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -88,9 +92,9 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
                 String src = recetteSelectionnee.getSrc();
                 String nom = recetteSelectionnee.getNom();
                 //ajouter mots clefs
-                Integer tempsCuisson = recetteSelectionnee.getCuisson();
-                Integer tempsPreparation = recetteSelectionnee.getPreparation();
-                Integer portions = recetteSelectionnee.getPortion();
+                String tempsCuisson = recetteSelectionnee.getCuisson();
+                String tempsPreparation = recetteSelectionnee.getPreparation();
+                String portions = recetteSelectionnee.getPortion();
                 String description = recetteSelectionnee.getDescription();
                 String origine = recetteSelectionnee.getOrigine();
                 String regime = recetteSelectionnee.getRegime();
@@ -119,7 +123,16 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
         }
         else if(v == btnRechercher){
 
-            Filtre filtre = new Filtre(origine.getSelectedItem().toString(), regime.getSelectedItem().toString(), type.getSelectedItem().toString());
+            String[] ingredientsListe = txtIngredient.getText().toString().split(",");
+            String[] origineValues = getResources().getStringArray(R.array.spinner_choice_origine_values);
+            String[] regimeValues = getResources().getStringArray(R.array.spinner_choice_regime_values);
+            String[] typeValues = getResources().getStringArray(R.array.spinner_choice_type_values);
+
+            String origine = this.origine.getSelectedItemPosition() == 0 ? "" : origineValues[this.origine.getSelectedItemPosition()];
+            String regime = this.regime.getSelectedItemPosition() == 0 ? "" : regimeValues[this.regime.getSelectedItemPosition()];
+            String type = this.type.getSelectedItemPosition() == 0 ? "" : typeValues[this.type.getSelectedItemPosition()];
+
+            Filtre filtre = new Filtre(origine, regime, type, ingredientsListe);
             presentateurRecette.obtenirRecettes(filtre ,new RecettesCallback() {
                 @Override
                 public void onRecettesReceived(List<Recette> recettes) {

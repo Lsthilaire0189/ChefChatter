@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="spinner_choice_origine_values">
+        <item>""</item>
+        <item>grec</item>
+        <item>algerien</item>
+        <item>irlandais</item>
+        <item>etatsUnis</item>
+        <item>francais</item>
+        <item>espagnole</item>
+        <item>mexicain</item>
+        <item>chinois</item>
+        <item>italien</item>
+    </string-array>
     <string-array name="spinner_choice_origine">
         <item>Veuillez sélectionner un pays</item>
         <item>Grec</item>

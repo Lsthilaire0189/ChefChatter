@@ -1,5 +1,6 @@
 package com.example.chefchatter.dao;
 
+import com.example.chefchatter.modele.Avis;
 import com.example.chefchatter.modele.Compte;
 import com.example.chefchatter.modele.Filtre;
 import com.example.chefchatter.modele.Recette;
@@ -27,5 +28,9 @@ public class DAO {
     }
     public static void modifierCompte (Compte compte) throws IOException, JSONException {
         new HttpJsonService().requeteModificationCompte(compte);
+    }
+
+    public static void ajouterCommentaire (Avis avis) throws IOException, JSONException {
+        new HttpJsonService().ajoutAvis(avis);
     }
 }

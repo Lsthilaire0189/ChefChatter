@@ -16,6 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.chefchatter.R;
+import com.example.chefchatter.modele.Avis;
+import com.example.chefchatter.modele.Compte;
+import com.example.chefchatter.presentateur.PresentateurAvis;
 
 public class DescriptionRecette extends AppCompatActivity implements View.OnClickListener{
 
@@ -31,7 +34,9 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
     private TextView txtDescPlat;
     private ListView listeIngredients;
     private TextView listeEtapes;
-    RatingBar ratingBar;
+    private RatingBar ratingBar;
+    private Button btnEnvoyerAvis;
+    private PresentateurAvis presentateurAvis;
 
 
 
@@ -39,6 +44,8 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_description_recette);
+
+        presentateurAvis = new PresentateurAvis(this);
 
         ratingBar = findViewById(R.id.ratingDesc);
         LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
@@ -58,6 +65,7 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
         txtDescPlat = findViewById(R.id.tvDescPlatDesc);
         listeIngredients = findViewById(R.id.lvIngredientsDesc);
         listeEtapes = findViewById(R.id.tvPrepaDesc);
+        btnEnvoyerAvis = findViewById(R.id.btnEnvoyerDesc);
 
         btnRetour.setOnClickListener(this);
         btnChefChatter.setOnClickListener(this);
@@ -66,9 +74,9 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
         Intent intent = getIntent();
         String srcRecette = intent.getStringExtra("SRC");
         String nomRecette = intent.getStringExtra("NOM");
-        Integer tmpsCuisson = intent.getIntExtra("TEMPS_CUISSON", 0);
-        Integer tmpsPrepa = intent.getIntExtra("TEMPS_PREPARATION", 0);
-        Integer nbPortions = intent.getIntExtra("PORTIONS", 0);
+        String tmpsCuisson = intent.getStringExtra("TEMPS_CUISSON");
+        String tmpsPrepa = intent.getStringExtra("TEMPS_PREPARATION");
+        String nbPortions = intent.getStringExtra("PORTIONS");
         String descPlat = intent.getStringExtra("DESCRIPTION");
         String origine = intent.getStringExtra("ORIGINE");
         String regime = intent.getStringExtra("REGIME");
@@ -80,9 +88,9 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
                 .into(imgRecette);
 
         txtNomRecette.setText(nomRecette);
-        txtMotsClefs.setText(String.format("Origine: %s | Régime: %s | Type: %s", origine, regime, type));
-        txtTmpsCuisson.setText(String.format("Temps de cuisson: %smin", tmpsCuisson.toString()));
-        txtTmpsPrepa.setText(String.format("Temps de préparation: %smin", tmpsPrepa.toString()));
+        txtMotsClefs.setText(String.format("Origine: #%s | Régime: #%s | Type: #%s", origine, regime, type));
+        txtTmpsCuisson.setText(String.format("Temps de cuisson: %s", tmpsCuisson.toString()));
+        txtTmpsPrepa.setText(String.format("Temps de préparation: %s", tmpsPrepa.toString()));
         txtNbPortions.setText(String.format("Nombre de portion(s): %s", nbPortions.toString()));
         txtDescPlat.setText(descPlat);
         listeEtapes.setText(etapes);
@@ -96,6 +104,14 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
         else if(v == btnChefChatter){
             Intent intent = new Intent(this, ActionActivity.class);
             startActivity(intent);
+        }
+        else if(v == btnCompte){
+            Intent intent = new Intent(this, Compte.class);
+            startActivity(intent);
+        }
+        else if(v == btnEnvoyerAvis){
+            Avis avis = new Avis();
+            presentateurAvis.CreationAvis(avis);
         }
 
     }

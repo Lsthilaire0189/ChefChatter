@@ -120,7 +120,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ConstraintLayout"
                 android:layout_width="400dp"
-                android:layout_height="63dp"
+                android:layout_height="80dp"
                 android:layout_marginTop="420dp"
                 android:background="#003D7E"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -141,7 +141,7 @@
                 <TextView
                     android:id="@+id/tvDescPlatDesc"
                     android:layout_width="wrap_content"
-                    android:layout_height="27dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:gravity="center"
                     android:text="@string/textview"
@@ -154,7 +154,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="400dp"
                 android:layout_height="99dp"
-                android:layout_marginTop="500dp"
+                android:layout_marginTop="525dp"
                 android:background="#003D7E"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.494"
@@ -187,7 +187,7 @@
                 android:id="@+id/constraintLayout"
                 android:layout_width="400dp"
                 android:layout_height="63dp"
-                android:layout_marginTop="612dp"
+                android:layout_marginTop="650dp"
                 android:background="#003D7E"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.505"
@@ -246,9 +246,9 @@
 
         <LinearLayout
             android:layout_width="393dp"
-            android:layout_height="211dp"
+            android:layout_height="221dp"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:background="#003D7E"
             android:orientation="vertical">
 
@@ -264,7 +264,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="79dp"
+                android:layout_height="94dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 

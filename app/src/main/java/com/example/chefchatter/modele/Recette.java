@@ -23,11 +23,11 @@ public class Recette {
     @JsonProperty("email")
     private String email;
     @JsonProperty("preparation")
-    private Integer preparation;
+    private String preparation;
     @JsonProperty("cuisson")
-    private Integer cuisson;
+    private String cuisson;
     @JsonProperty("portion")
-    private Integer portion;
+    private String portion;
     @JsonProperty("prenom")
     private String prenom;
 
@@ -35,7 +35,7 @@ public class Recette {
         // Default constructor
     }
 
-    public Recette(int id, String nom, String origine, String regime, String type, String description, String etape, String src, String email, Integer preparation, Integer cuisson, Integer portion, String prenom) {
+    public Recette(int id, String nom, String origine, String regime, String type, String description, String etape, String src, String email, String preparation, String cuisson, String portion, String prenom) {
         this.id = id;
         this.nom = nom;
         this.origine = origine;
@@ -123,27 +123,27 @@ public class Recette {
         this.email = email;
     }
 
-    public int getPreparation() {
+    public String getPreparation() {
         return preparation;
     }
 
-    public void setPreparation(int preparation) {
+    public void setPreparation(String preparation) {
         this.preparation = preparation;
     }
 
-    public int getCuisson() {
+    public String getCuisson() {
         return cuisson;
     }
 
-    public void setCuisson(int cuisson) {
+    public void setCuisson(String cuisson) {
         this.cuisson = cuisson;
     }
 
-    public int getPortion() {
+    public String getPortion() {
         return portion;
     }
 
-    public void setPortion(int portion) {
+    public void setPortion(String portion) {
         this.portion = portion;
     }
 
