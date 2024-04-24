@@ -35,7 +35,7 @@ public class HttpJsonService {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         JSONObject obj = new JSONObject();
         try {
-            JSONArray j = new JSONArray();
+            JSONArray j = new JSONArray(filtre.getChoixIngredients());
             j.put("");
             obj.put("origine", filtre.getChoixOrigine());
             obj.put("regime", filtre.getChoixRegime());
