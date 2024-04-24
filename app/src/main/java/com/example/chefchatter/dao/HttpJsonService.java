@@ -162,7 +162,7 @@ public class HttpJsonService {
                     mdp = jsonResponse.getString("password");
 
                 }
-                compteRetourne = new Compte(username, email, prenom, nom, dateNaissance, mdp);
+                compteRetourne = new Compte(prenom, nom, email, username, dateNaissance, mdp);
                 compteMessage = new CompteMessage(reponseFinale, compteRetourne);
 
 
