@@ -3,6 +3,7 @@ package com.example.chefchatter.dao;
 import com.example.chefchatter.modele.Avis;
 import com.example.chefchatter.modele.Compte;
 import com.example.chefchatter.modele.CompteMessage;
+import com.example.chefchatter.modele.Favoris;
 import com.example.chefchatter.modele.Filtre;
 import com.example.chefchatter.modele.Recette;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -363,17 +364,108 @@ public class HttpJsonService {
             Response response = okHttpClient.newCall(request).execute();
             if (response.isSuccessful()) {
                 String responseBody = response.body().string();
-                JSONObject jsonResponse = new JSONObject(responseBody);
-                String message = jsonResponse.getString("message");
+              //  JSONObject jsonResponse = new JSONObject(responseBody);
+             //   String message = jsonResponse.getString("message");
 
-                compteMessage = new CompteMessage(message, compte);
+                compteMessage = new CompteMessage(responseBody, compte);
 
             } else {
                 System.out.println("Request not successful. Response Code: " + response.code());
             }
-        } catch (IOException | JSONException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return compteMessage;
+    }
+
+    public String requetteAjouterFavoris(Favoris favoris) {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        JSONObject jsonParam = new JSONObject();
+        try {
+            jsonParam.put("email", favoris.getEmail());
+            jsonParam.put("recetteId", favoris.getRecetteId());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody requestBody = RequestBody.create(jsonParam.toString(), JSON);
+        Request request = new Request.Builder()
+                .url(URL_POINT_ENTREE + "/favori")
+                .post(requestBody)
+                .build();
+        try {
+            Response response = okHttpClient.newCall(request).execute();
+            if (response.isSuccessful()) {
+                String responseBody = response.body().string();
+                JSONObject jsonResponse = new JSONObject(responseBody);
+                String message = jsonResponse.getString("message");
+                return message;
+            } else {
+                return "Error: " + response.code();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Error: " + e.getMessage();
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String requetteSupprimerFavoris(Favoris favoris) {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        JSONObject jsonParam = new JSONObject();
+        try {
+            jsonParam.put("email", favoris.getEmail());
+            jsonParam.put("recetteId", favoris.getRecetteId());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody requestBody = RequestBody.create(jsonParam.toString(), JSON);
+        Request request = new Request.Builder()
+                .url(URL_POINT_ENTREE + "/enleverFavoris") // updated endpoint
+                .post(requestBody) // use delete() for a DELETE request
+                .build();
+        try {
+            Response response = okHttpClient.newCall(request).execute();
+            if (response.isSuccessful()) {
+                String responseBody = response.body().string();
+                JSONObject jsonResponse = new JSONObject(responseBody);
+                String message = jsonResponse.getString("message");
+                return message;
+            } else {
+                return "Error: " + response.code();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Error: " + e.getMessage();
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public List<Recette> requeteObtenirFavoris(String email) throws IOException, JSONException {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(URL_POINT_ENTREE + "/favori/" + email)
+                .get()
+                .build();
+        try {
+            Response response = okHttpClient.newCall(request).execute();
+            if (response.isSuccessful()) {
+                String responseBody = response.body().string();
+                if (isValidJSON(responseBody)) {
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    List<Recette> recettes = Arrays.asList(objectMapper.readValue(responseBody, Recette[].class));
+                    return recettes;
+                } else {
+                    return null;
+                }
+            } else {
+                throw new IOException("Unexpected code " + response);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.example.chefchatter.dao;
 import com.example.chefchatter.modele.Avis;
 import com.example.chefchatter.modele.Compte;
 import com.example.chefchatter.modele.CompteMessage;
+import com.example.chefchatter.modele.Favoris;
 import com.example.chefchatter.modele.Filtre;
 import com.example.chefchatter.modele.Recette;
 import com.example.chefchatter.modele.Recette_Ingredient;
@@ -50,6 +51,9 @@ public class DAO {
         return DAO.compte;
     }
 
+    public static String  ajouterFavoris (Favoris favoris) throws IOException, JSONException {
+         return new HttpJsonService().requetteAjouterFavoris(favoris);
+    }
     public static List<Avis> getAvisSelonRecette(Integer idRecette) throws IOException, JSONException {
         return new HttpJsonService().getCommentairesSelonRecette(idRecette);
     }
@@ -63,6 +67,12 @@ public class DAO {
     }
 
 
+    public static String supprimerFavoris(Favoris favoris) throws IOException, JSONException {
+        return new HttpJsonService().requetteSupprimerFavoris(favoris);
+    }
+    public static List<Recette> obtenirFavoris ( String email) throws IOException, JSONException {
+        return new HttpJsonService().requeteObtenirFavoris(email);
+    }
 }
 
 

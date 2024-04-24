@@ -21,6 +21,10 @@ public class ActionActivity extends AppCompatActivity implements View.OnClickLis
     private  Button btnParcourirRecettes;
     private Button btnModifierCompte;
 
+    private Button btnFavoris;
+    private Compte compte;
+    private PresentateurCompte presentateurCompte;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,21 +35,26 @@ public class ActionActivity extends AppCompatActivity implements View.OnClickLis
         btnDeconnexion = findViewById(R.id.btnDeconnexion);
         btnParcourirRecettes = findViewById(R.id.btnParcourirRecettes);
         btnModifierCompte = findViewById(R.id.btnModifierCompte);
+        btnFavoris = findViewById(R.id.btnParcourirFavoris);
 
         btnDeconnexion.setOnClickListener(this);
         btnParcourirRecettes.setOnClickListener(this);
         btnModifierCompte.setOnClickListener(this);
+        btnFavoris.setOnClickListener(this);
 
-        PresentateurCompte presentateurCompte = new PresentateurCompte(this);
-        String nomUtilisateur =presentateurCompte.getCompte().getNomUtilisateur();
-        String messaqeBienvenue = getResources().getString(R.string.bonjour, nomUtilisateur);
-        tvBonjour.setText(messaqeBienvenue);
-        //        Intent intent2 = getIntent();
-     //   Compte compte = (Compte) intent2.getSerializableExtra("compte");
-    //    presentateurCompte.setCompte(compte);
-
+         presentateurCompte = new PresentateurCompte(this);
 
     }
+    protected void onResume() {
+        super.onResume();
+        compte = presentateurCompte.getCompte();
+        if (compte != null) {
+            String nomUtilisateur = compte.getNomUtilisateur();
+            String messaqeBienvenue = getResources().getString(R.string.bonjour, nomUtilisateur);
+            tvBonjour.setText(messaqeBienvenue);
+        }
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -59,6 +68,10 @@ public class ActionActivity extends AppCompatActivity implements View.OnClickLis
         else if(v.getId() == R.id.btnModifierCompte){
 
             Intent intent = new Intent(this, ModifierCompteActivity.class);
+            startActivity(intent);
+        }
+        else if(v.getId() == R.id.btnParcourirFavoris){
+            Intent intent = new Intent(this, ListeFavorisActivity.class);
             startActivity(intent);
         }
     }

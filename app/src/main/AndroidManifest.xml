@@ -38,6 +38,8 @@
             android:exported="false" />
         <activity android:name=".activites.ModifierCompteActivity"
             android:exported="false" />
+        <activity android:name=".activites.ListeFavorisActivity"
+            android:exported="false" />
 
         <activity
             android:name=".activites.MainActivity"

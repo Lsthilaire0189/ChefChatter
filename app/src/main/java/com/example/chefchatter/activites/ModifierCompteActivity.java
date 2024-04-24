@@ -16,7 +16,6 @@ import com.example.chefchatter.modele.CompteMessage;
 import com.example.chefchatter.presentateur.PresentateurCompte;
 
 public class ModifierCompteActivity extends AppCompatActivity implements View.OnClickListener {
-
     private DatePicker datePicker;
     private EditText courriel;
     private EditText nomUtilisateur;
@@ -52,17 +51,19 @@ public class ModifierCompteActivity extends AppCompatActivity implements View.On
         btnSupprimer.setOnClickListener(this);
 
         presentateurCompte = new PresentateurCompte(this);
-     //   Compte compteInitial = (Compte) getIntent().getSerializableExtra("compte");
+        //   Compte compteInitial = (Compte) getIntent().getSerializableExtra("compte");
+
         compteInitial = presentateurCompte.getCompte();
+if(compteInitial != null) {
+    courriel.setText(compteInitial.getCourriel());
+    nomUtilisateur.setText(compteInitial.getNomUtilisateur());
+    mdp.setText(compteInitial.getMdp());
+    prenom.setText(compteInitial.getPrenom());
+    nom.setText(compteInitial.getNom());
+    String[] date = compteInitial.getDateNaissance().split("-");
+    datePicker.updateDate(Integer.parseInt(date[2]), Integer.parseInt(date[1]) - 1, Integer.parseInt(date[0]));
+        }
 
-        courriel.setText(compteInitial.getCourriel());
-        nomUtilisateur.setText(compteInitial.getNomUtilisateur());
-        mdp.setText(compteInitial.getMdp());
-        prenom.setText(compteInitial.getPrenom());
-        nom.setText(compteInitial.getNom());
-
-        String[] date = compteInitial.getDateNaissance().split("-");
-        datePicker.updateDate(Integer.parseInt(date[2]), Integer.parseInt(date[1]) - 1, Integer.parseInt(date[0]));
 
 
 
@@ -74,8 +75,8 @@ public class ModifierCompteActivity extends AppCompatActivity implements View.On
             finish();
         } else if (v.getId() == R.id.mcBtnModifier) {
             String date = datePicker.getDayOfMonth() + "-" + (datePicker.getMonth() + 1) + "-" + datePicker.getYear();
-            Compte compteModifie = new Compte(prenom.getText().toString(), nom.getText().toString(), courriel.getText().toString(), nomUtilisateur.getText().toString(), date, mdp.getText().toString());
-              presentateurCompte.modifierCompte(compteModifie, new CompteCallBack() {
+             compteModifie = new Compte(prenom.getText().toString(), nom.getText().toString(), courriel.getText().toString(), nomUtilisateur.getText().toString(), date, mdp.getText().toString());
+            presentateurCompte.modifierCompte(compteModifie, new CompteCallBack() {
                 @Override
                 public void onReponseRecieved(CompteMessage reponse) {
                     if(reponse.getMessage().equals("Compte modifié avec succès")) {
@@ -84,10 +85,11 @@ public class ModifierCompteActivity extends AppCompatActivity implements View.On
                 }
 
             });
-              finish();
+            finish();
         } else if (v.getId() == R.id.mcBtnSupprimer) {
-            presentateurCompte.supprimerCompte(presentateurCompte.getCompte());
 
+            presentateurCompte.supprimerCompte(presentateurCompte.getCompte());
+            finish();
         }
 
     }

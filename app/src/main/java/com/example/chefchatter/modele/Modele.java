@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Modele {
+    private List<Favoris> listFavoris = new ArrayList<>();
     private List<Recette> recettes = new ArrayList<>();
+    private List<Recette> recettesFav = new ArrayList<>();
 
     private List<Recette_Ingredient> ingredients = new ArrayList<>();
 
@@ -63,4 +65,28 @@ public class Modele {
         return null;
     }
 
+    public void setListFavoris(List<Favoris> listFavoris) {
+        this.listFavoris = listFavoris;
+    }
+    public void setRecettesFavorites(List<Recette> recettes) {
+        this.recettesFav = recettes;
+    }
+    public Recette getRecetteFavorite(int index) {
+        return  this.recettesFav.get(index);
+    }
+    public List<Recette> getRecettesFavorites() {
+        return this.recettesFav;
+    }
+
+    public void ajouterFavoris(Favoris favoris) {
+        this.listFavoris.add(favoris);
+    }
+
+    public List<Favoris> getListFavoris() {
+        return listFavoris;
+    }
+
+    public void supprimer(Favoris favoris) {
+        this.listFavoris.remove(favoris);
+    }
 }

@@ -72,6 +72,14 @@
             android:text="@string/btn_modifier_compte"
             tools:ignore="TextSizeCheck" />
 
+        <Button
+            android:id="@+id/btnParcourirFavoris"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Parcourir vos favoris!"
+            tools:layout_editor_absoluteX="116dp"
+            tools:layout_editor_absoluteY="472dp" />
+
     </LinearLayout>
 
 </LinearLayout>
