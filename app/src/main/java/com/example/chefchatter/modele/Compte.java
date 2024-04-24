@@ -1,23 +1,33 @@
 package com.example.chefchatter.modele;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 
 public class Compte implements Serializable {
 
+    @JsonProperty("prenom")
     private String prenom;
+
+    @JsonProperty("nomDeFamille")
     private String nom;
-    private String courriel;
+
+    @JsonProperty("email")
+    private String email;
+    @JsonProperty("username")
     private String nomUtilisateur;
+    @JsonProperty("dateDeNaissance")
     private String dateNaissance;
-    private String mdp;
+    @JsonProperty("password")
+    private String password;
 
     public Compte(String prenom, String nom, String courriel, String nomUtilisateur, String dateNaissance, String mdp) {
         this.prenom = prenom;
         this.nom = nom;
-        this.courriel = courriel;
+        this.email = courriel;
         this.dateNaissance = dateNaissance;
         this.nomUtilisateur = nomUtilisateur;
-        this.mdp = mdp;
+        this.password = mdp;
     }
 
     public String getPrenom() {
@@ -29,7 +39,7 @@ public class Compte implements Serializable {
     }
 
     public String getCourriel() {
-        return courriel;
+        return email;
     }
 
     public String getNomUtilisateur() {
@@ -41,7 +51,7 @@ public class Compte implements Serializable {
     }
 
     public String getMdp() {
-        return mdp;
+        return password;
     }
 
 }

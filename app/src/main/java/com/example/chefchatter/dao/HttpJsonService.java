@@ -87,7 +87,7 @@ public class HttpJsonService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        RequestBody corpsRequete = RequestBody.create(obj.toString(), JSON);
+        RequestBody corpsRequete = RequestBody.create(String.valueOf(obj), JSON);
         Request request = new Request.Builder()
                 .url(URL_POINT_ENTREE + "/ratings")
                 .post(corpsRequete)

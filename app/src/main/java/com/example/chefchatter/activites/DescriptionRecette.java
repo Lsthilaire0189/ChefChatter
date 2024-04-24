@@ -7,6 +7,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
@@ -50,6 +51,7 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
     private Compte compte;
     Integer idRecette;
     List<Recette_Ingredient> ingredients = new ArrayList<>();
+    private EditText etCommentaire;
 
 
 
@@ -81,6 +83,7 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
         listeIngredients = findViewById(R.id.lvIngredientsDesc);
         listeEtapes = findViewById(R.id.tvPrepaDesc);
         btnEnvoyerAvis = findViewById(R.id.btnEnvoyerDesc);
+        etCommentaire = findViewById(R.id.editTextText);
 
         btnRetour.setOnClickListener(this);
         btnChefChatter.setOnClickListener(this);
@@ -122,6 +125,8 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
                 });
             }
         });
+
+        btnEnvoyerAvis.setOnClickListener(this);
     }
 
     @Override
@@ -142,6 +147,10 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
             compte = presentateurCompte.getCompte();
             avis.setRecetteId(idRecette);
             avis.setUserId(compte.getCourriel());
+            int rating = Math.round(ratingBar.getRating());
+            avis.setRating(rating);
+            avis.setCommentaire(etCommentaire.getText().toString());
+            avis.setUsername(compte.getNomUtilisateur());
             presentateurAvis.CreationAvis(avis);
         }
 
