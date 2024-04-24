@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.example.chefchatter.activites.ConnexionCompteActivity;
 import com.example.chefchatter.activites.CreationCompteActivity;
+import com.example.chefchatter.activites.ModifierCompteActivity;
 import com.example.chefchatter.dao.CompteCallBack;
 import com.example.chefchatter.dao.DAO;
 import com.example.chefchatter.modele.Compte;
@@ -14,7 +15,6 @@ import com.example.chefchatter.modele.ModeleManager;
 import org.json.JSONException;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 public class PresentateurCompte {
     private Activity activity;
@@ -26,7 +26,7 @@ public class PresentateurCompte {
         this.modele = ModeleManager.getInstance();
     }
 
-    public void connexionCompte(Compte compte, CompteCallBack callback){
+    public void connexionCompte(Compte compte, CompteCallBack callBack){
         new Thread() {
 
             @Override
@@ -34,7 +34,10 @@ public class PresentateurCompte {
                 try {
                     modele = ModeleManager.getInstance();
                     CompteMessage reponse = DAO.connexionCompte(compte);
-                    callback.onReponseRecieved(reponse);
+                    callBack.onReponseRecieved(reponse);
+                   // modele.setCompteCourrant(compte);
+                  //  compteSetCallback.onCompteSet(reponse.getCompte());
+
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -57,7 +60,7 @@ public class PresentateurCompte {
                 try {
                     modele = ModeleManager.getInstance();
                     CompteMessage reponse = DAO.creationCompte(compte);
-                    modele.setCompteCourrant(compte);
+
                     callback.onReponseRecieved(reponse);
                     activity.runOnUiThread(new Runnable() {
                         @Override
@@ -75,13 +78,20 @@ public class PresentateurCompte {
 
     }
 
-    public void modifierCompte(Compte compte) {
+    public void modifierCompte(Compte compte,CompteCallBack callBack) {
         new Thread() {
             @Override
             public void run() {
                 try {
                     modele = ModeleManager.getInstance();
-                    DAO.modifierCompte(compte);
+                   CompteMessage reponse= DAO.modifierCompte(compte);
+                    callBack.onReponseRecieved(reponse);
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ((ModifierCompteActivity) activity).afficherMessage(reponse);
+                        }
+                    });
                 } catch (JSONException e) {
                 } catch (IOException e) {
                 }
@@ -89,11 +99,30 @@ public class PresentateurCompte {
         }.start();
     }
 
-    public void supprimerCompte(Compte compteModifie) {
+    public void supprimerCompte(Compte compte) {
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    modele = ModeleManager.getInstance();
+                    CompteMessage reponse= DAO.supprimerCompte(compte);
+
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ((ModifierCompteActivity) activity).afficherMessage(reponse);
+                        }
+                    });
+                } catch (JSONException e) {
+                } catch (IOException e) {
+                }
+            }
+        }.start();
+
     }
 
     public void setCompte(Compte compte) {
-        DAO.setCompte(compte);
+       modele.setCompteCourrant(compte);
     }
     public Compte getCompte() {
        return modele.getCompteCourrant();

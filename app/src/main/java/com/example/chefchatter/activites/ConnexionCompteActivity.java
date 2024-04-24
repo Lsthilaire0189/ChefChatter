@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.chefchatter.dao.CompteCallBack;
+import com.example.chefchatter.dao.CompteSetCallback;
 import com.example.chefchatter.modele.Compte;
 import com.example.chefchatter.R;
 import com.example.chefchatter.modele.CompteMessage;
@@ -82,7 +83,19 @@ public class ConnexionCompteActivity extends AppCompatActivity implements View.O
                     }
                 }
             });
-            Intent intent = new Intent(ConnexionCompteActivity.this, ActionActivity.class);
+//            },new CompteSetCallback() {
+//                @Override
+//                public void onCompteSet(Compte compte) {
+//                    // Start ModifierCompteActivity here and pass the Compte object as an extra
+//                    presentateurCompte.setCompte(compte);
+//
+//                   // Intent intent = new Intent(ConnexionCompteActivity.this, ActionActivity.class);
+//                  //  intent.putExtra("compte", compte);
+//                  //  startActivity(intent);
+//                }
+//            });
+
+           Intent intent = new Intent(ConnexionCompteActivity.this, ActionActivity.class);
             startActivity(intent);
 
         }

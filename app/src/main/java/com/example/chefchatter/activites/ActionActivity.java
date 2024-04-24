@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.chefchatter.R;
 import com.example.chefchatter.activites.ListeRecette;
+import com.example.chefchatter.modele.Compte;
+import com.example.chefchatter.presentateur.PresentateurCompte;
 
 public class ActionActivity extends AppCompatActivity implements View.OnClickListener{
     private TextView tvBonjour;
@@ -39,7 +41,10 @@ public class ActionActivity extends AppCompatActivity implements View.OnClickLis
         String nomUtilisateur = getIntent().getStringExtra("username");
         String messaqeBienvenue = getResources().getString(R.string.bonjour, nomUtilisateur);
         tvBonjour.setText(messaqeBienvenue);
-
+        PresentateurCompte presentateurCompte = new PresentateurCompte(this);
+//        Intent intent2 = getIntent();
+     //   Compte compte = (Compte) intent2.getSerializableExtra("compte");
+    //    presentateurCompte.setCompte(compte);
 
 
     }
@@ -57,6 +62,7 @@ public class ActionActivity extends AppCompatActivity implements View.OnClickLis
             startActivity(intent);
         }
         else if(v.getId() == R.id.btnModifierCompte){
+
             Intent intent = new Intent(this, ModifierCompteActivity.class);
             startActivity(intent);
         }
