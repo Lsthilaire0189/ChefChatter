@@ -29,7 +29,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-<<<<<<< HEAD
             <Button
                 android:id="@+id/btnCompteDesc"
                 android:layout_width="104dp"
@@ -54,12 +53,12 @@
                 android:id="@+id/drBtnImgEtoile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/btn_star_big_on"
-                tools:layout_editor_absoluteX="339dp"
-                tools:layout_editor_absoluteY="126dp" />
+                android:layout_marginTop="144dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/btn_star_big_on" />
 
-=======
->>>>>>> ef20dc8b0c78659aa1a9f8d070e3a7c61560d735
             <ImageView
                 android:id="@+id/ivRecetteDesc"
                 android:layout_width="125dp"
