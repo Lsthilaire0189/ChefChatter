@@ -57,7 +57,8 @@ public class ActionActivity extends AppCompatActivity implements View.OnClickLis
             startActivity(intent);
         }
         else if(v.getId() == R.id.btnModifierCompte){
-            //TODO
+            Intent intent = new Intent(this, ModifierCompteActivity.class);
+            startActivity(intent);
         }
     }
 }

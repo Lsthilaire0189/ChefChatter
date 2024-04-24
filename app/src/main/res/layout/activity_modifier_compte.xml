@@ -9,12 +9,6 @@
         android:layout_height="wrap_content"
         android:src="@drawable/imagetest_copie_2" />-->
 
-    <Button
-        android:id="@+id/mcBtnRetour"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/retour" />
-
     <TextView
         android:id="@+id/mcTv"
         android:layout_width="wrap_content"
@@ -63,17 +57,34 @@
             android:hint="Mot de passe"
             android:inputType="textPassword" />
 
-        <Button
-            android:id="@+id/modifyAccount"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Modifier le compte" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/deleteAccount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Supprimer le compte" />
+            <Button
+                android:id="@+id/mcBtnRetour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/retour" />
+
+            <Button
+                android:id="@+id/mcBtnModifier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Modifier le compte" />
+
+            <Button
+                android:id="@+id/mcBtnSupprimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:text="Supprimer le compte" />
+
+        </LinearLayout>
 
     </LinearLayout>
+
 </LinearLayout>

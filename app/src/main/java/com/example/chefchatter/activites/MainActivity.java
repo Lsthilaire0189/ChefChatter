@@ -32,17 +32,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         if(view == boutonCreationCompte) {
-            Intent intent = new Intent(this, MainActivity2.class);
+            Intent intent = new Intent(this, ConnexionCompteActivity.class);
             startActivity(intent);
         }
         if(view==boutonConnexion)
         {
-            Intent intent=new Intent(this, MainActivity3.class);
+            Intent intent=new Intent(this, CreationCompteActivity.class);
             startActivity(intent);
         }
         if(view==boutonAfficherRecette)
         {
-            Intent intent= new Intent(this, AffichageRecette.class);
+            Intent intent= new Intent(this, AffichageRecetteActivity.class);
             startActivity(intent);
         }
     }

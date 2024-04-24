@@ -8,10 +8,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.chefchatter.R;
-import com.example.chefchatter.activites.ActionActivity;
-import com.example.chefchatter.activites.ListeRecette;
 
-public class AffichageRecette extends AppCompatActivity implements View.OnClickListener{
+public class AffichageRecetteActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button btnRetour;
     private Button btnCompte;
