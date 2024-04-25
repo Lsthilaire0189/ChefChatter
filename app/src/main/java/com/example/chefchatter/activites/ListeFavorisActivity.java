@@ -40,11 +40,15 @@ public class ListeFavorisActivity extends AppCompatActivity implements View.OnCl
         btnRetour = findViewById(R.id.lfBtnRetour);
         btnRetour.setOnClickListener(this);
         presentateurCompte = new PresentateurCompte(this);
-        compteCourant =  presentateurCompte.getCompte();
 
-        presentateurRecette = new PresentateurRecette(this);
-        presentateurFavoris = new PresentateurFavoris(this);
-        adapteurFavoris = new AdapteurFavoris(this, R.layout.layout_recettes, presentateurFavoris);
+        compteCourant =  presentateurCompte.getCompte();
+        if(compteCourant != null) {
+            presentateurRecette = new PresentateurRecette(this);
+            presentateurFavoris = new PresentateurFavoris(this);
+            adapteurFavoris = new AdapteurFavoris(this, R.layout.layout_recettes, presentateurFavoris);
+        }
+
+
         listView.setAdapter(adapteurFavoris);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

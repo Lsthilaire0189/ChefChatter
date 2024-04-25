@@ -334,7 +334,7 @@ public class HttpJsonService {
                 JSONObject jsonResponse = new JSONObject(responseBody);
                 String message = jsonResponse.getString("message");
 
-                compteMessage = new CompteMessage(message, null);
+                compteMessage = new CompteMessage(message, compte);
 
             } else {
                 System.out.println("Request not successful. Response Code: " + response.code());

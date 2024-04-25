@@ -51,20 +51,16 @@ public class ModifierCompteActivity extends AppCompatActivity implements View.On
         btnSupprimer.setOnClickListener(this);
 
         presentateurCompte = new PresentateurCompte(this);
-        //   Compte compteInitial = (Compte) getIntent().getSerializableExtra("compte");
-
         compteInitial = presentateurCompte.getCompte();
-if(compteInitial != null) {
-    courriel.setText(compteInitial.getCourriel());
-    nomUtilisateur.setText(compteInitial.getNomUtilisateur());
-    mdp.setText(compteInitial.getMdp());
-    prenom.setText(compteInitial.getPrenom());
-    nom.setText(compteInitial.getNom());
-    String[] date = compteInitial.getDateNaissance().split("-");
-    datePicker.updateDate(Integer.parseInt(date[2]), Integer.parseInt(date[1]) - 1, Integer.parseInt(date[0]));
+        if (compteInitial != null) {
+            courriel.setText(compteInitial.getCourriel());
+            nomUtilisateur.setText(compteInitial.getNomUtilisateur());
+            mdp.setText(compteInitial.getMdp());
+            prenom.setText(compteInitial.getPrenom());
+            nom.setText(compteInitial.getNom());
+            String[] date = compteInitial.getDateNaissance().split("-");
+            datePicker.updateDate(Integer.parseInt(date[2]), Integer.parseInt(date[1]) - 1, Integer.parseInt(date[0]));
         }
-
-
 
 
     }
@@ -75,11 +71,11 @@ if(compteInitial != null) {
             finish();
         } else if (v.getId() == R.id.mcBtnModifier) {
             String date = datePicker.getDayOfMonth() + "-" + (datePicker.getMonth() + 1) + "-" + datePicker.getYear();
-             compteModifie = new Compte(prenom.getText().toString(), nom.getText().toString(), courriel.getText().toString(), nomUtilisateur.getText().toString(), date, mdp.getText().toString());
+            compteModifie = new Compte(prenom.getText().toString(), nom.getText().toString(), courriel.getText().toString(), nomUtilisateur.getText().toString(), date, mdp.getText().toString());
             presentateurCompte.modifierCompte(compteModifie, new CompteCallBack() {
                 @Override
                 public void onReponseRecieved(CompteMessage reponse) {
-                    if(reponse.getMessage().equals("Compte modifié avec succès")) {
+                    if (reponse.getMessage().equals("Compte modifié avec succès")) {
                         presentateurCompte.setCompte(reponse.getCompte());
                     }
                 }
@@ -87,7 +83,6 @@ if(compteInitial != null) {
             });
             finish();
         } else if (v.getId() == R.id.mcBtnSupprimer) {
-
             presentateurCompte.supprimerCompte(presentateurCompte.getCompte());
             finish();
         }
@@ -95,6 +90,6 @@ if(compteInitial != null) {
     }
 
     public void afficherMessage(CompteMessage compteMessage) {
-        Toast.makeText(this,compteMessage.getMessage(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, compteMessage.getMessage(), Toast.LENGTH_SHORT).show();
     }
 }
