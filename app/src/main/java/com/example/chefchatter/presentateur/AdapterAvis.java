@@ -18,18 +18,28 @@ import com.example.chefchatter.R;
 import com.example.chefchatter.modele.Avis;
 import com.example.chefchatter.modele.Recette;
 
+import java.util.List;
+
 public class AdapterAvis extends ArrayAdapter<Avis> {
 
     private Context contexte;
     private int viewResourceId;
     private Resources resources;
     private PresentateurAvis presentateur;
+
+    private List<Avis> avisList;
+
     public AdapterAvis(@NonNull Context context, int resource, PresentateurAvis presentateur) {
         super(context, resource);
         this.contexte = context;
         this.viewResourceId = resource;
         this.resources = contexte.getResources();
         this.presentateur = presentateur;
+    }
+
+    public AdapterAvis(Context context, int resource, List<Avis> avisList) {
+        super(context, resource, avisList);
+        this.avisList = avisList;
     }
     @Override
     public int getCount() {

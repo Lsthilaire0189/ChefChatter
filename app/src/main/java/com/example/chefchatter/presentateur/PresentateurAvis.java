@@ -101,5 +101,9 @@ public class PresentateurAvis {
         return modele.getAvisCourrant();
     }
 
+    public void setAvisCourrant(Avis avis) {
+        modele.setAvisCourrant(avis);
+    }
+
 
 }

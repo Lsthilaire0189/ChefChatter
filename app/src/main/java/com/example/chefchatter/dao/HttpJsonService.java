@@ -37,7 +37,6 @@ public class HttpJsonService {
         JSONObject obj = new JSONObject();
         try {
             JSONArray j = new JSONArray(filtre.getChoixIngredients());
-            j.put("");
             obj.put("origine", filtre.getChoixOrigine());
             obj.put("regime", filtre.getChoixRegime());
             obj.put("type", filtre.getChoixType());

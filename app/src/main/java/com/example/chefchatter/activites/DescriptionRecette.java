@@ -1,6 +1,7 @@
 package com.example.chefchatter.activites;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
@@ -65,6 +66,7 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
     List<Avis> listeCommentaires = new ArrayList<>();
     ListView lvCommentaires;
     boolean isAvisCourrant = false;
+    Avis avisTemp = new Avis();
 
 
     @Override
@@ -95,10 +97,11 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
         btnEnvoyerAvis = findViewById(R.id.btnEnvoyerDesc);
         etCommentaire = findViewById(R.id.editTextText);
         btnEtoile = findViewById(R.id.drBtnImgEtoile);
+        btnCompte = findViewById(R.id.btnCompteDesc);
 
         btnRetour.setOnClickListener(this);
 //        btnChefChatter.setOnClickListener(this);
-//        btnCompte.setOnClickListener(this);
+        btnCompte.setOnClickListener(this);
         btnEtoile.setOnClickListener(this);
         lvCommentaires = findViewById(R.id.lvCommentaires);
 
@@ -116,6 +119,7 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
         String regime = intent.getStringExtra("REGIME");
         String type = intent.getStringExtra("TYPE");
         String etapes = intent.getStringExtra("ETAPES");
+
 
         Glide.with(this)
                 .load(srcRecette)
@@ -163,6 +167,7 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
                         ratingBar.setRating(avis.getRating());
                         btnEnvoyerAvis.setText("Modifier l'avis");
                         isAvisCourrant = true;
+                        avisTemp = avis;
                     }
                 });
             }
@@ -189,12 +194,28 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
         }
         else if (v == btnEnvoyerAvis) {
             if (isAvisCourrant) {
-                Avis avis = presentateurAvis.getAvisCourrant();
+                updateListView();
                 int rating = Math.round(ratingBar.getRating());
-                avis.setRating(rating);
-                avis.setCommentaire(etCommentaire.getText().toString());
-                presentateurAvis.modifAvis(avis);
-                Toast.makeText(this, "Avis modifié", Toast.LENGTH_SHORT).show();
+                avisTemp.setRating(rating);
+                avisTemp.setCommentaire(etCommentaire.getText().toString());
+                btnEnvoyerAvis.setText("Modifier l'avis");
+                presentateurAvis.modifAvis(avisTemp);
+                Toast.makeText(DescriptionRecette.this, "Avis modifié", Toast.LENGTH_SHORT).show();
+                presentateurAvis.obtenirAvisCourrant(presentateurCompte.getCompte().getCourriel(), idRecette, new AvisCourrantCallback() {
+                    @Override
+                    public void onAvisCourrantReceived(Avis avis) {
+                        runOnUiThread(() -> {
+                            if (avis != null) {
+                                etCommentaire.setText(avisTemp.getCommentaire());
+                                ratingBar.setRating(avisTemp.getRating());
+                                btnEnvoyerAvis.setText("Modifier l'avis");
+                                isAvisCourrant = true;
+                                avisTemp = avis;
+                            }
+                        });
+                    }
+                });
+                updateListView();
             } else {
                 Avis avis = new Avis();
                 compte = presentateurCompte.getCompte();
@@ -205,11 +226,54 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
                 avis.setCommentaire(etCommentaire.getText().toString());
                 avis.setUsername(compte.getNomUtilisateur());
                 presentateurAvis.CreationAvis(avis);
+                isAvisCourrant = true;
+                btnEnvoyerAvis.setText("Modifier l'avis");
+                Toast.makeText(this, "Avis envoyé", Toast.LENGTH_SHORT).show();
+                presentateurAvis.obtenirAvisCourrant(presentateurCompte.getCompte().getCourriel(), idRecette, new AvisCourrantCallback() {
+                    @Override
+                    public void onAvisCourrantReceived(Avis avis) {
+                        runOnUiThread(() -> {
+                            if (avis != null) {
+                                etCommentaire.setText(avis.getCommentaire());
+                                ratingBar.setRating(avis.getRating());
+                                btnEnvoyerAvis.setText("Modifier l'avis");
+                                isAvisCourrant = true;
+                                avisTemp = avis;
+                            }
+                        });
+                    }
+                });
+                updateListView();
             }
+            updateListView();
         }
     }
     public void  afficherMessage( String message){
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+
+    public void updateListView() {
+        presentateurAvis.obtenirAvis(idRecette, new AvisCallback() {
+            @Override
+            public void onAvisReceived(List<Avis> avis) {
+                runOnUiThread(() -> {
+
+                    listeCommentaires.clear();
+                    listeCommentaires.addAll(avis);
+
+                    // Ensure adapter is connected and updated
+                    AdapterAvis adapter = (AdapterAvis) lvCommentaires.getAdapter();
+                    if (adapter != null) {
+                        adapter.notifyDataSetChanged();
+                    } else {
+                        adapter = new AdapterAvis(DescriptionRecette.this, R.layout.layout_commentaire, listeCommentaires);
+                        lvCommentaires.setAdapter(adapter);
+                    }
+                });
+            }
+        });
+    }
+
+
 
 }

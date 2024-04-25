@@ -30,6 +30,9 @@ public class AdapteurRecette extends ArrayAdapter {
         this.resources = contexte.getResources();
         this.presentateur = presentateur;
     }
+
+
+
     @Override
     public int getCount() {
         return this.presentateur.getNbRecettes();

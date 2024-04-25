@@ -57,7 +57,8 @@
                 android:layout_marginEnd="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/btn_star_big_on" />
+                app:srcCompat="@android:drawable/btn_star_big_on"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageView
                 android:id="@+id/ivRecetteDesc"
@@ -127,12 +128,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ConstraintLayout"
+                android:id="@+id/DescPlatLayout"
                 android:layout_width="400dp"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="420dp"
                 android:background="#003D7E"
+                android:paddingBottom="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.505"
                 app:layout_constraintStart_toStartOf="parent"
@@ -162,14 +165,15 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/IngredientLayout"
                 android:layout_width="400dp"
                 android:layout_height="99dp"
-                android:layout_marginTop="540dp"
-                android:background="#003D7E"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.494"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_marginTop="20dp"
+            android:background="#003D7E"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/DescPlatLayout">
 
                 <TextView
                     android:id="@+id/textView14"
@@ -196,13 +200,14 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
                 android:layout_width="400dp"
-                android:layout_height="300dp"
-                android:layout_marginTop="650dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:background="#003D7E"
+                android:paddingBottom="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.505"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/IngredientLayout">
 
                 <TextView
                     android:id="@+id/textView17"

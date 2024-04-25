@@ -42,7 +42,7 @@ public class ActionActivity extends AppCompatActivity implements View.OnClickLis
         btnModifierCompte.setOnClickListener(this);
         btnFavoris.setOnClickListener(this);
 
-         presentateurCompte = new PresentateurCompte(this);
+        presentateurCompte = new PresentateurCompte(this);
 
     }
     protected void onResume() {
