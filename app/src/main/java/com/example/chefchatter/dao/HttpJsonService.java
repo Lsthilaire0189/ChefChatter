@@ -240,25 +240,8 @@ public class HttpJsonService {
                 compteMessage = new CompteMessage(reponseFinale, compteRetourne);
 
 
-                // Display the message in a Toast on the UI thread
-                //  String username = jsonResponse.getString("username");
-
-
-                // Display the message in a Toast on the UI thread
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        Toast.makeText(getApplicationContext(), connexion, Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//
-//                Intent intent = new Intent(MainActivity2.this, ActionActivity.class);
-//                intent.putExtra("username", username);
-//                startActivity(intent);
-
             } else {
                 String message = jsonResponse.getString("message");
-                // Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             }
         } catch (IOException | JSONException e) {
             e.printStackTrace();
@@ -465,6 +448,39 @@ public class HttpJsonService {
         } catch (IOException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public String verificationFavoris(Favoris favoris) {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("mail", favoris.getEmail());
+            obj.put("recette", favoris.getRecetteId());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody requestBody = RequestBody.create(obj.toString(), JSON);
+        Request request = new Request.Builder()
+                .url(URL_POINT_ENTREE + "/estFavoris")
+                .post(requestBody)
+                .build();
+        try {
+            Response response = okHttpClient.newCall(request).execute();
+            if (response.isSuccessful()) {
+                String responseBody = response.body().string();
+                JSONObject jsonResponse = new JSONObject(responseBody);
+                String message = jsonResponse.getString("result");
+                return message;
+            } else {
+                return "Error: " + response.code();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
         }
     }
 }

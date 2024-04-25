@@ -73,6 +73,10 @@ public class DAO {
     public static List<Recette> obtenirFavoris ( String email) throws IOException, JSONException {
         return new HttpJsonService().requeteObtenirFavoris(email);
     }
+
+    public static String estFavoris (Favoris favoris) throws IOException, JSONException {
+        return new HttpJsonService().verificationFavoris(favoris);
+    }
 }
 
 

@@ -23,6 +23,7 @@ import com.example.chefchatter.R;
 import com.example.chefchatter.dao.AvisCallback;
 import com.example.chefchatter.dao.AvisCourrantCallback;
 import com.example.chefchatter.dao.IngredientsCallback;
+import com.example.chefchatter.dao.VerificationFavoriCallback;
 import com.example.chefchatter.modele.Avis;
 import com.example.chefchatter.modele.Compte;
 import com.example.chefchatter.modele.Favoris;
@@ -188,9 +189,20 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
             Intent intent = new Intent(this, Compte.class);
             startActivity(intent);
         } else if (v == btnEtoile) {
+
             compte = presentateurCompte.getCompte();
             favoris = new Favoris(compte.getCourriel(), idRecette);
             presentateurFavoris.ajouterFavoris(favoris);
+
+            presentateurFavoris.verificationFavoris(favoris, new
+                    VerificationFavoriCallback() {
+                        @Override
+                        public void onRecettesReceived(String reponse) {
+                            if (reponse.equals("faux")) {
+                                presentateurFavoris.ajouterFavoris(favoris);
+                            }
+                        }
+                    });
         }
         else if (v == btnEnvoyerAvis) {
             if (isAvisCourrant) {

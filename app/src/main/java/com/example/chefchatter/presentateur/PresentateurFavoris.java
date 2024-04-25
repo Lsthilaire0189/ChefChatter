@@ -6,6 +6,7 @@ import com.example.chefchatter.activites.ConnexionCompteActivity;
 import com.example.chefchatter.activites.DescriptionRecette;
 import com.example.chefchatter.activites.ListeFavorisActivity;
 import com.example.chefchatter.dao.DAO;
+import com.example.chefchatter.dao.VerificationFavoriCallback;
 import com.example.chefchatter.modele.Favoris;
 import com.example.chefchatter.modele.Modele;
 import com.example.chefchatter.modele.ModeleManager;
@@ -33,20 +34,20 @@ public class PresentateurFavoris {
             @Override
             public void run() {
                 try {
-                modele = ModeleManager.getInstance();
-                 String reponse =  DAO.ajouterFavoris(favoris);
-                 modele.ajouterFavoris(favoris);
-                activity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
+                    modele = ModeleManager.getInstance();
+                    String reponse =  DAO.ajouterFavoris(favoris);
+                    modele.ajouterFavoris(favoris);
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
 
-                        ((DescriptionRecette) activity).afficherMessage(reponse);
+                            ((DescriptionRecette) activity).afficherMessage(reponse);
 
-                    }
-                });
-            } catch (JSONException e) {
-            } catch (IOException e) {
-            }
+                        }
+                    });
+                } catch (JSONException e) {
+                } catch (IOException e) {
+                }
             }
         }.start();
     }
@@ -58,7 +59,8 @@ public class PresentateurFavoris {
                     modele = ModeleManager.getInstance();
                     String reponse =  DAO.supprimerFavoris(favoris);
                     modele.supprimer(favoris);
-                     activity.runOnUiThread(new Runnable() {
+
+                    activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             ((ListeFavorisActivity) activity).raffraichirListe();
@@ -72,9 +74,10 @@ public class PresentateurFavoris {
         }.start();
     }
 
+
     public List<Favoris> getListeFavoris() {
         modele = ModeleManager.getInstance();
-       return modele.getListFavoris();
+        return modele.getListFavoris();
     }
     public List<Recette> getRecettesFavorites() {
         modele = ModeleManager.getInstance();
@@ -103,6 +106,26 @@ public class PresentateurFavoris {
                         @Override
                         public void run() {
                             ((ListeFavorisActivity) activity).raffraichirListe();
+                        }
+                    });
+                } catch (JSONException e) {
+                } catch (IOException e) {
+                }
+            }
+        }.start();
+    }
+    public void verificationFavoris(Favoris favoris, VerificationFavoriCallback callback) {
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    modele = ModeleManager.getInstance();
+                    String reponse = DAO.estFavoris(favoris);
+                    callback.onRecettesReceived(reponse);
+                    ((DescriptionRecette)activity).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ((DescriptionRecette) activity).afficherMessage(reponse);
                         }
                     });
                 } catch (JSONException e) {

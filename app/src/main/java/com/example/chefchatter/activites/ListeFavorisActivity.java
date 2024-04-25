@@ -121,7 +121,7 @@ public class ListeFavorisActivity extends AppCompatActivity implements View.OnCl
     }
     public void raffraichirListe() {
         this.adapteurFavoris.notifyDataSetChanged();
-       // Toast.makeText(this,adaptateur.getCount()+" comptes",Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this,adaptateur.getCount()+" comptes",Toast.LENGTH_SHORT).show();
     }
     public void afficherMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
