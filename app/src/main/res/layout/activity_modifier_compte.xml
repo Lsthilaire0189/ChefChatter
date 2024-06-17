@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -24,64 +25,80 @@
             android:id="@+id/mcPtPrenom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Prénom" />
+            android:hint="Prénom"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
             android:id="@+id/mcPtNomFamille"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nom de famille" />
+            android:hint="Nom de famille"
+            tools:ignore="TouchTargetSizeCheck" />
 
-        <DatePicker
-            android:id="@+id/mcDateNaissance"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="hint" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <EditText
             android:id="@+id/mcPtCourriel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Adresse courriel"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
             android:id="@+id/mcPtNomUtilisateur"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nom d'utilisateur" />
+            android:hint="Nom d'utilisateur"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
             android:id="@+id/mcPtpassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Mot de passe"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/mcBtnRetour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="@string/retour" />
+                android:text="@string/retour"
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/mcBtnModifier"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="2"
-                android:text="Modifier le compte" />
+                android:text="Modifier le compte"
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/mcBtnSupprimer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="50"
-                android:text="Supprimer le compte" />
+                android:text="Supprimer le compte"
+                android:textSize="12sp" />
 
         </LinearLayout>
 

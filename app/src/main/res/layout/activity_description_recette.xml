@@ -35,18 +35,8 @@
                 android:layout_height="57dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/mon_compte"
+                android:text="@string/menu"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/btnChefChatterDesc"
-                android:layout_width="150dp"
-                android:layout_height="57dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/chefchatter"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton

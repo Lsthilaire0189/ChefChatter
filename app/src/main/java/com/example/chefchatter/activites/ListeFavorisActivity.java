@@ -66,7 +66,6 @@ public class ListeFavorisActivity extends AppCompatActivity implements View.OnCl
                                     Recette recetteSelectionnee = presentateurFavoris.getRecetteFavorie(position);
                                     String src = recetteSelectionnee.getSrc();
                                     String nom = recetteSelectionnee.getNom();
-                                    //ajouter mots clefs
                                     Integer idRecette = recetteSelectionnee.getId();
                                     String tempsCuisson = recetteSelectionnee.getCuisson();
                                     String tempsPreparation = recetteSelectionnee.getPreparation();
@@ -114,9 +113,6 @@ public class ListeFavorisActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View v) {
         if (v.getId() == R.id.lfBtnRetour) {
             finish();
-//        } else if () {
-//            // TODO
-//        }
         }
     }
     public void raffraichirListe() {

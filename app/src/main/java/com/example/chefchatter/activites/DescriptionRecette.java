@@ -181,21 +181,16 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         if (v == btnRetour) {
             finish();
-//        } else if (v == btnChefChatter) {
-//            Intent intent = new Intent(this, ActionActivity.class);
-//            startActivity(intent);
-//        }
         }else if (v == btnCompte) {
-            Intent intent = new Intent(this, Compte.class);
+            Intent intent = new Intent(this, ActionActivity.class);
             startActivity(intent);
         } else if (v == btnEtoile) {
 
             compte = presentateurCompte.getCompte();
             favoris = new Favoris(compte.getCourriel(), idRecette);
-            presentateurFavoris.ajouterFavoris(favoris);
+            presentateurFavoris = new PresentateurFavoris(this);
 
-            presentateurFavoris.verificationFavoris(favoris, new
-                    VerificationFavoriCallback() {
+            presentateurFavoris.verificationFavoris(favoris, new VerificationFavoriCallback() {
                         @Override
                         public void onRecettesReceived(String reponse) {
                             if (reponse.equals("faux")) {
@@ -205,11 +200,14 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
                     });
         }
         else if (v == btnEnvoyerAvis) {
+            updateListView();
             if (isAvisCourrant) {
                 updateListView();
+                compte = presentateurCompte.getCompte();
                 int rating = Math.round(ratingBar.getRating());
                 avisTemp.setRating(rating);
                 avisTemp.setCommentaire(etCommentaire.getText().toString());
+                avisTemp.setUsername(compte.getNomUtilisateur());
                 btnEnvoyerAvis.setText("Modifier l'avis");
                 presentateurAvis.modifAvis(avisTemp);
                 Toast.makeText(DescriptionRecette.this, "Avis modifié", Toast.LENGTH_SHORT).show();
@@ -229,6 +227,7 @@ public class DescriptionRecette extends AppCompatActivity implements View.OnClic
                 });
                 updateListView();
             } else {
+                updateListView();
                 Avis avis = new Avis();
                 compte = presentateurCompte.getCompte();
                 avis.setRecetteId(idRecette);

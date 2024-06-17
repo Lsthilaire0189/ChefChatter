@@ -64,4 +64,13 @@
     <string name="envoyer">Envoyer</string>
     <string name="veuillez_laissez_votre_commentaire">Veuillez laissez votre commentaire</string>
     <string name="avis_d_autres_utilisteurs">Avis d\'autres utilisteurs:</string>
+    <string name="modifier_le_compte">Modifier le compte</string>
+    <string name="supprimer_le_compte">Supprimer le compte</string>
+    <string name="adresse_courriel2">Adresse courriel</string>
+    <string name="nom_de_famille2">Nom de famille</string>
+    <string name="mot_de_passe2">Mot de passe</string>
+    <string name="pr_nom2">Prénom</string>
+    <string name="nom_d_utilisateur2">Nom d\'utilisateur</string>
+    <string name="modification_du_compte">Modification du compte</string>
+    <string name="menu">Menu</string>
 </resources>

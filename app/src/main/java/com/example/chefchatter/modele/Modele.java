@@ -16,6 +16,10 @@ public class Modele {
         return recettes;
     }
 
+    public void setRecettes(List<Recette> recettes) {
+        this.recettes = recettes;
+    }
+
     public List<Avis> getAvis() {
         return avis;
     }
@@ -34,11 +38,6 @@ public class Modele {
         this.avisCourrant = avisCourrant;
     }
 
-
-
-    public void setRecettes(List<Recette> recettes) {
-        this.recettes = recettes;
-    }
 
     Compte compteCourrant ;
 

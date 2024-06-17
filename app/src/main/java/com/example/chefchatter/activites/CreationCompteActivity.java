@@ -97,10 +97,11 @@ public class CreationCompteActivity extends AppCompatActivity implements View.On
                 @Override
                 public void onReponseRecieved(CompteMessage reponse) {
                     if(reponse.getMessage().equals("Compte crée avec succès")) {
-                        finish();
+
                     }
                 }
             });
+            finish();
 
 
         }

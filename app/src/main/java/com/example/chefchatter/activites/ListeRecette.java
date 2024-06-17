@@ -81,17 +81,58 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
         btnRetour = findViewById(R.id.btnRet);
         btnRetour.setOnClickListener(this);
 
-        presentateurRecette = new PresentateurRecette(this);
-
-        adaptateur = new AdapteurRecette(this,
-                R.layout.layout_recettes,presentateurRecette);
-        listeRecette.setAdapter(adaptateur);
 
         txtIngredient = findViewById(R.id.etListeIngredients);
 
-        listeRecette.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == btnRetour){
+
+            finish();
+        }
+        else if(v == btnRechercher){
+
+            String[] ingredientsListe = txtIngredient.getText().toString().split(",");
+            String[] origineValues = getResources().getStringArray(R.array.spinner_choice_origine_values);
+            String[] regimeValues = getResources().getStringArray(R.array.spinner_choice_regime_values);
+            String[] typeValues = getResources().getStringArray(R.array.spinner_choice_type_values);
+
+            String origine = this.origine.getSelectedItemPosition() == 0 ? "" : origineValues[this.origine.getSelectedItemPosition()];
+            String regime = this.regime.getSelectedItemPosition() == 0 ? "" : regimeValues[this.regime.getSelectedItemPosition()];
+            String type = this.type.getSelectedItemPosition() == 0 ? "" : typeValues[this.type.getSelectedItemPosition()];
+
+            filtre = new Filtre(origine, regime, type, ingredientsListe);
+
+            presentateurRecette = new PresentateurRecette(this);
+
+            adaptateur = new AdapteurRecette(this,
+                    R.layout.layout_recettes,presentateurRecette);
+            listeRecette.setAdapter(adaptateur);
+
+            presentateurRecette.obtenirRecettes(filtre ,new RecettesCallback() {
+                @Override
+                public void onRecettesReceived(List<Recette> recettes) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ListeRecette.this.recettes = presentateurRecette.getRecettes();
+                            adaptateur.clear();
+                            adaptateur.addAll(recettes);
+                            raffraichirListe();
+                        }
+                    });
+
+                }
+
+            });
+
+
+            listeRecette.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent iRecetteDescription = new Intent(getApplicationContext(), DescriptionRecette.class);
                     Recette recetteSelectionnee = (Recette) parent.getAdapter().getItem(position);
                     String src = recetteSelectionnee.getSrc();
@@ -119,42 +160,7 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
                     iRecetteDescription.putExtra("ETAPES", etape);
                     startActivity(iRecetteDescription);
 
-            }
-        });
-    }
-
-    @Override
-    public void onClick(View v) {
-        if(v == btnRetour){
-            finish();
-        }
-        else if(v == btnRechercher){
-
-            String[] ingredientsListe = txtIngredient.getText().toString().split(",");
-            String[] origineValues = getResources().getStringArray(R.array.spinner_choice_origine_values);
-            String[] regimeValues = getResources().getStringArray(R.array.spinner_choice_regime_values);
-            String[] typeValues = getResources().getStringArray(R.array.spinner_choice_type_values);
-
-            String origine = this.origine.getSelectedItemPosition() == 0 ? "" : origineValues[this.origine.getSelectedItemPosition()];
-            String regime = this.regime.getSelectedItemPosition() == 0 ? "" : regimeValues[this.regime.getSelectedItemPosition()];
-            String type = this.type.getSelectedItemPosition() == 0 ? "" : typeValues[this.type.getSelectedItemPosition()];
-
-            filtre = new Filtre(origine, regime, type, ingredientsListe);
-            presentateurRecette.obtenirRecettes(filtre ,new RecettesCallback() {
-                @Override
-                public void onRecettesReceived(List<Recette> recettes) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            ListeRecette.this.recettes = presentateurRecette.getRecettes();
-                            adaptateur.clear();
-                            adaptateur.addAll(recettes);
-                            raffraichirListe();
-                        }
-                    });
-
                 }
-
             });
 
     }
@@ -166,43 +172,4 @@ public class ListeRecette extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // Initialize the adapter if null
-        if (adaptateur == null) {
-            adaptateur = new AdapteurRecette(this, R.layout.layout_recettes, presentateurRecette);
-            listeRecette.setAdapter(adaptateur);
-        } else {
-            adaptateur.clear();
-            adaptateur.notifyDataSetChanged();
-        }
-    }
-
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        int r = checkSelfPermission("android.permission.INTERNET");
-//        if (r == PackageManager.PERMISSION_GRANTED) {
-//            //    Toast.makeText(this, "Accès Internet permis!", Toast.LENGTH_LONG).show();
-//            this.presentateurRecette.obtenirRecettes(filtre, new RecettesCallback() {
-//                @Override
-//                public void onRecettesReceived(List<Recette> recettes) {
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            ListeRecette.this.recettes = presentateurRecette.getRecettes();
-//                            adaptateur.clear();
-//                            adaptateur.addAll(recettes);
-//                            raffraichirListe();
-//                        }
-//                    });
-//
-//                }
-//            }
-//            );
-//        } else {
-//            Toast.makeText(this, "Accès Internet non permis!", Toast.LENGTH_LONG).show();
-//        }
-//    }
 }
